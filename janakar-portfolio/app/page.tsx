@@ -131,10 +131,10 @@ export default function Home() {
       torusGeometry.attributes.position.needsUpdate = true
 
       // Rotations
-      sphere.rotation.y += 0.005
-      torus.rotation.x += 0.005
-      torus.rotation.y += 0.001
-      torus.rotation.z += 0.007
+      sphere.rotation.y += 0.0025
+      torus.rotation.x += 0.0025
+      torus.rotation.y += 0.0005
+      torus.rotation.z += 0.0035
 
       renderer.render(scene, camera)
       animationId = requestAnimationFrame(tick)
@@ -179,74 +179,200 @@ export default function Home() {
 
   return (
     <>
-      <canvas ref={canvasRef} className="webgl" />
-
-      <div className="te">
-        <p className="name">Janakar Patel</p>
-        <p className="tag">Data, AI/ML Software + Research (Little)</p>
-        
-        <div className="social_media">
-          <a href="https://github.com/janakarpatel" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="https://www.linkedin.com/in/janakarpatel/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href="https://twitter.com/janakarpatel" target="_blank" rel="noopener noreferrer">Twitter</a>
-          <a href="mailto:your-email@example.com">Email</a>
+      <div className="main-container">
+        <div className="background-three-js">
+          <canvas ref={canvasRef} className="webgl" />
         </div>
-
-        <div className="description">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
-          Asperiores nisi odio consectetur quod, nesciunt ad enim ex, labore perferendis, 
-          tempore iusto natus quas? Ab distinctio sed fuga, dolores eum ea.
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis quidem inventore veritatis dicta mollitia id! Facilis, 
-          totam. Mollitia cupiditate recusandae molestiae accusantium voluptates laborum rem amet illo, 
-          beatae sed vero!
+        <div className="main-text-container">
+          <div className="content-section">
+            <div className="content-left">
+              <div className="title-section">
+                <p className="name">Janakar Patel</p>
+                <p className="tag">Data, AI/ML Software + Research (Little)</p>
+              </div>
+              <div className="social_media">
+                <a href="https://github.com/janakarpatel" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://www.linkedin.com/in/janakarpatel/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://twitter.com/janakarpatel" target="_blank" rel="noopener noreferrer">Twitter</a>
+                <a href="mailto:your-email@example.com">Email</a>
+              </div>
+            </div>
+            <div className="content-right">
+              <div className="description">
+                I am an engineer and explorer at the intersection of data, AI, and creativity. 
+                I am currently a Data Engineer at Tata Consultancy Services, where I design large-scale 
+                workflows in Databricks and build systems that make large language models more reliable 
+                in practice.
+                <br />
+                I am at the beginning of my research journey. I don't yet have years of publications, 
+                but I am studying how research is done, experimenting with ideas, and looking for 
+                opportunities to contribute. My curiosity drives me toward areas where AI, data, 
+                and human creativity meet, and I hope to grow into a researcher who creates work that 
+                both advances understanding and impacts the world.
+                <br />
+                Outside of engineering, I create in other forms too. I paint on canvas, draw cartoons, 
+                and design graphics and user interfaces. I love the process of shaping ideas into something 
+                visual and tangible. I also love to play games — video games for imagination and physical 
+                sports for energy. I often find myself on a volleyball court, not competitively, but for 
+                the joy of play and teamwork.
+                <br />
+                I see myself as a learner first — someone who wants to explore widely, from AI to art, 
+                from research to design. My goal is to bring these threads together and grow into a polymath 
+                who learns across disciplines and contributes to changing the world in meaningful ways.
+              </div>
+            </div>
+          </div>
+          <div className="footer-section">
+            <div className="footer">
+              <div className="domain_name">
+                © janakarpatel.com / <span className="top_badge">Portfolio {currentYear}</span>
+              </div>
+              <div className="equation-container">
+                <div className="sphere_equation">(x - a)² + (y - b)² + (z - c)² = r²</div>
+                <div className="torus_equation">(x² + y² + z² + R² - r²)² = 4R²(x² + y²)</div>
+              </div>
+            </div>
+          </div>
+          <div className="mode-toggle" onClick={toggleTheme}>
+            <svg 
+              className="moon-icon" 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="24" 
+              height="24" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            >
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+            </svg>
+            <svg 
+              className="sun-icon" 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="24" 
+              height="24" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            >
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="m4.93 4.93 1.41 1.41"></path>
+              <path d="m17.66 17.66 1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="m6.34 17.66-1.41 1.41"></path>
+              <path d="m19.07 4.93-1.41 1.41"></path>
+            </svg>
+          </div>
         </div>
       </div>
-
-      <div className="mode-toggle" onClick={toggleTheme}>
-        <svg 
-          className="moon-icon" 
-          xmlns="http://www.w3.org/2000/svg" 
-          width="24" 
-          height="24" 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="currentColor" 
-          strokeWidth="2" 
-          strokeLinecap="round" 
-          strokeLinejoin="round"
-        >
-          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-        </svg>
-        <svg 
-          className="sun-icon" 
-          xmlns="http://www.w3.org/2000/svg" 
-          width="24" 
-          height="24" 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="currentColor" 
-          strokeWidth="2" 
-          strokeLinecap="round" 
-          strokeLinejoin="round"
-        >
-          <circle cx="12" cy="12" r="4"></circle>
-          <path d="M12 2v2"></path>
-          <path d="M12 20v2"></path>
-          <path d="m4.93 4.93 1.41 1.41"></path>
-          <path d="m17.66 17.66 1.41 1.41"></path>
-          <path d="M2 12h2"></path>
-          <path d="M20 12h2"></path>
-          <path d="m6.34 17.66-1.41 1.41"></path>
-          <path d="m19.07 4.93-1.41 1.41"></path>
-        </svg>
-      </div>
-
-      <div className="domain_name">
-        © janakarpatel.com 
-        <p className="top_badge">Portfolio @{currentYear}</p>
-      </div>
-      <div className="torus_equation">(x² + y² + z² + R² - r²)² = 4R²(x² + y²)</div>
-      <div className="sphere_equation">(x - a)² + (y - b)² + (z - c)² = r²</div>
     </>
+    // <>
+    //   <canvas ref={canvasRef} className="webgl" />
+    //   <div className='main-wrapper'>
+    //     <div className="content-layout">
+    //       {/* Left side - Image
+    //       <div className="image-section">
+    //         <div className="profile-image">
+    //           <img src="/profile.jpg" alt="Janakar Patel" />
+    //         </div>
+    //       </div> */}
+
+    //       {/* Right side - Content */}
+    //       <div className="content-section">
+    //         <div className="te">
+    //           <p className="name">Janakar Patel</p>
+    //           <p className="tag">Data, AI/ML Software + Research (Little)</p>
+              
+    //           <div className="social_media">
+    //             <a href="https://github.com/janakarpatel" target="_blank" rel="noopener noreferrer">GitHub</a>
+    //             <a href="https://www.linkedin.com/in/janakarpatel/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    //             <a href="https://twitter.com/janakarpatel" target="_blank" rel="noopener noreferrer">Twitter</a>
+    //             <a href="mailto:your-email@example.com">Email</a>
+    //           </div>
+
+    //           <div className="description">
+    //             I am an engineer and explorer at the intersection of data, AI, and creativity. 
+    //             I am currently a Data Engineer at Tata Consultancy Services, where I design large-scale 
+    //             workflows in Databricks and build systems that make large language models more reliable 
+    //             in practice.
+    //             <br />
+    //             <br />
+    //             I am at the beginning of my research journey. I don't yet have years of publications, 
+    //             but I am studying how research is done, experimenting with ideas, and looking for 
+    //             opportunities to contribute. My curiosity drives me toward areas where AI, data, 
+    //             and human creativity meet, and I hope to grow into a researcher who creates work that 
+    //             both advances understanding and impacts the world.
+    //             <br />
+    //             Outside of engineering, I create in other forms too. I paint on canvas, draw cartoons, 
+    //             and design graphics and user interfaces. I love the process of shaping ideas into something 
+    //             visual and tangible. I also love to play games — video games for imagination and physical 
+    //             sports for energy. I often find myself on a volleyball court, not competitively, but for 
+    //             the joy of play and teamwork.
+    //             <br />
+    //             I see myself as a learner first — someone who wants to explore widely, from AI to art, 
+    //             from research to design. My goal is to bring these threads together and grow into a polymath 
+    //             who learns across disciplines and contributes to changing the world in meaningful ways.
+    //           </div>
+    //         </div>
+    //       </div>
+    //     </div>
+
+    //     <div className="mode-toggle" onClick={toggleTheme}>
+    //       <svg 
+    //         className="moon-icon" 
+    //         xmlns="http://www.w3.org/2000/svg" 
+    //         width="24" 
+    //         height="24" 
+    //         viewBox="0 0 24 24" 
+    //         fill="none" 
+    //         stroke="currentColor" 
+    //         strokeWidth="2" 
+    //         strokeLinecap="round" 
+    //         strokeLinejoin="round"
+    //       >
+    //         <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+    //       </svg>
+    //       <svg 
+    //         className="sun-icon" 
+    //         xmlns="http://www.w3.org/2000/svg" 
+    //         width="24" 
+    //         height="24" 
+    //         viewBox="0 0 24 24" 
+    //         fill="none" 
+    //         stroke="currentColor" 
+    //         strokeWidth="2" 
+    //         strokeLinecap="round" 
+    //         strokeLinejoin="round"
+    //       >
+    //         <circle cx="12" cy="12" r="4"></circle>
+    //         <path d="M12 2v2"></path>
+    //         <path d="M12 20v2"></path>
+    //         <path d="m4.93 4.93 1.41 1.41"></path>
+    //         <path d="m17.66 17.66 1.41 1.41"></path>
+    //         <path d="M2 12h2"></path>
+    //         <path d="M20 12h2"></path>
+    //         <path d="m6.34 17.66-1.41 1.41"></path>
+    //         <path d="m19.07 4.93-1.41 1.41"></path>
+    //       </svg>
+    //     </div>
+
+    //     <div className="domain_name">
+    //       © janakarpatel.com / <span className="top_badge">Portfolio {currentYear}</span>
+    //     </div>
+    //     <div className="torus_equation">(x² + y² + z² + R² - r²)² = 4R²(x² + y²)</div>
+    //     <div className="sphere_equation">(x - a)² + (y - b)² + (z - c)² = r²</div>
+        
+    //     {/* Test section for smooth scrolling */}
+    //     {/* <div style={{ height: '100vh', width: '100vw' }}>Test</div> */}
+    // </div>
+    // </>
   )
 }
