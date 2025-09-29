@@ -203,33 +203,22 @@ export default function Home() {
                 I am currently a Data Engineer at Tata Consultancy Services, where I design large-scale 
                 workflows in Databricks and build systems that make large language models more reliable 
                 in practice.
-                <br />
+                <br /><br />
                 I am at the beginning of my research journey. I don't yet have years of publications, 
                 but I am studying how research is done, experimenting with ideas, and looking for 
                 opportunities to contribute. My curiosity drives me toward areas where AI, data, 
                 and human creativity meet, and I hope to grow into a researcher who creates work that 
                 both advances understanding and impacts the world.
-                <br />
+                <br /><br />
                 Outside of engineering, I create in other forms too. I paint on canvas, draw cartoons, 
                 and design graphics and user interfaces. I love the process of shaping ideas into something 
                 visual and tangible. I also love to play games — video games for imagination and physical 
                 sports for energy. I often find myself on a volleyball court, not competitively, but for 
                 the joy of play and teamwork.
-                <br />
+                <br /><br />
                 I see myself as a learner first — someone who wants to explore widely, from AI to art, 
                 from research to design. My goal is to bring these threads together and grow into a polymath 
                 who learns across disciplines and contributes to changing the world in meaningful ways.
-              </div>
-            </div>
-          </div>
-          <div className="footer-section">
-            <div className="footer">
-              <div className="domain_name">
-                © janakarpatel.com / <span className="top_badge">Portfolio {currentYear}</span>
-              </div>
-              <div className="equation-container">
-                <div className="sphere_equation">(x - a)² + (y - b)² + (z - c)² = r²</div>
-                <div className="torus_equation">(x² + y² + z² + R² - r²)² = 4R²(x² + y²)</div>
               </div>
             </div>
           </div>
@@ -272,6 +261,17 @@ export default function Home() {
             </svg>
           </div>
         </div>
+        <div className="footer-section">
+            <div className="footer">
+              <div className="domain_name">
+                © janakarpatel.com / <span className="top_badge">Portfolio {currentYear}</span>
+              </div>
+              <div className="equation-container">
+                <div className="sphere_equation">(x - a)² + (y - b)² + (z - c)² = r²</div>
+                <div className="torus_equation">(x² + y² + z² + R² - r²)² = 4R²(x² + y²)</div>
+              </div>
+            </div>
+          </div>
       </div>
     </>
     // <>
