@@ -21,7 +21,7 @@ export default function Home() {
       0.1,
       1000
     )
-    camera.position.set(0, 0, 100)
+    camera.position.set(0, 0, 90)
     scene.add(camera)
 
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
@@ -33,7 +33,7 @@ export default function Home() {
     const sphereMaterial = new THREE.PointsMaterial({ size: 0.2, color: 0x4da6ff })
 
     // Sphere Point Cloud
-    const sphereGeometry = new THREE.SphereGeometry(24, 100, 100)
+    const sphereGeometry = new THREE.SphereGeometry(15, 100, 50)
     const spherePositions = sphereGeometry.attributes.position.array as Float32Array
     
     // Add jitter to sphere
@@ -58,7 +58,7 @@ export default function Home() {
     const sphere = new THREE.Points(sphereGeometry, sphereMaterial)
 
     // Torus Point Cloud
-    const torusGeometry = new THREE.TorusGeometry(35, 7, 32, 200)
+    const torusGeometry = new THREE.TorusGeometry(30, 10, 32, 200)
     const torusPositions = torusGeometry.attributes.position.array as Float32Array
     
     // Add jitter to torus
@@ -131,10 +131,10 @@ export default function Home() {
       torusGeometry.attributes.position.needsUpdate = true
 
       // Rotations
-      sphere.rotation.y += 0.005
-      torus.rotation.x += 0.005
-      torus.rotation.y += 0.001
-      torus.rotation.z += 0.007
+      sphere.rotation.y += 0.0025
+      torus.rotation.x += 0.0025
+      torus.rotation.y += 0.0005
+      torus.rotation.z += 0.0035
 
       renderer.render(scene, camera)
       animationId = requestAnimationFrame(tick)
@@ -179,74 +179,106 @@ export default function Home() {
 
   return (
     <>
-      <canvas ref={canvasRef} className="webgl" />
-
-      <div className="te">
-        <p className="name">Janakar Patel</p>
-        <p className="tag">Data, AI/ML Software + Research (Little)</p>
-        
-        <div className="social_media">
-          <a href="https://github.com/janakarpatel" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="https://www.linkedin.com/in/janakarpatel/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href="https://twitter.com/janakarpatel" target="_blank" rel="noopener noreferrer">Twitter</a>
-          <a href="mailto:your-email@example.com">Email</a>
+      <div className="main-container">
+        <div className="background-three-js">
+          <canvas ref={canvasRef} className="webgl" />
         </div>
-
-        <div className="description">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
-          Asperiores nisi odio consectetur quod, nesciunt ad enim ex, labore perferendis, 
-          tempore iusto natus quas? Ab distinctio sed fuga, dolores eum ea.
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis quidem inventore veritatis dicta mollitia id! Facilis, 
-          totam. Mollitia cupiditate recusandae molestiae accusantium voluptates laborum rem amet illo, 
-          beatae sed vero!
+        <div className="main-text-container">
+          <div className="content-section">
+            <div className="content-left">
+              <div className="title-section">
+                <p className="name">Janakar Patel</p>
+                <p className="tag">Data, AI/ML Software + Research (Little)</p>
+              </div>
+              <div className="social_media">
+                <a href="https://github.com/janakarpatel" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://www.linkedin.com/in/janakarpatel/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://twitter.com/janakarpatel" target="_blank" rel="noopener noreferrer">Twitter</a>
+                <a href="mailto:contact.janakarpatel@gmail.com">Email</a>
+              </div>
+            </div>
+            <div className="content-right">
+              <div className="description">
+                I build intelligent data systems that power real-time decision-making at enterprise scale. 
+                At Tata Consultancy Services, I’ve been fortunate to work at the intersection of data engineering 
+                and applied AI, where I design and optimize large-scale data pipelines on Databricks to support 
+                Retrieval-Augmented Generation (RAG) systems. My work focuses on creating the invisible infrastructure 
+                that enables large language models to think, retrieve, and respond reliably across multiple business 
+                units. Alongside this, I’ve developed regression-based machine learning models to interpret market 
+                and customer service data, enhancing workforce scheduling accuracy and optimizing service performance. 
+                Through these efforts, I’ve come to appreciate the role of robust data foundations in advancing AI 
+                capabilities—not just as systems of automation, but as systems of intelligence that scale human 
+                decision-making across industries.
+                <br /><br />
+                Outside of my work, I am deeply interested in pursuing research. I am continuously learning 
+                how impactful research is conducted, exploring ideas that connect AI (specifically Machine Learning), Data and Computation. 
+                I love to contribute to work that creates real-world impact.
+              </div>
+            </div>
+          </div>
+          <div className="mode-toggle" onClick={toggleTheme}>
+            <svg 
+              className="moon-icon" 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="24" 
+              height="24" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            >
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+            </svg>
+            <svg 
+              className="sun-icon" 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="24" 
+              height="24" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            >
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="m4.93 4.93 1.41 1.41"></path>
+              <path d="m17.66 17.66 1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="m6.34 17.66-1.41 1.41"></path>
+              <path d="m19.07 4.93-1.41 1.41"></path>
+            </svg>
+          </div>
+          <div className="interest-section">
+            <p>Past</p>
+            <div className="interests">
+              <p><a href="https://example.com/icem-intern" target="_blank" rel="noopener noreferrer">iCEM</a> • Data & AI Solutions Intern</p>
+              <p><a href="https://example.com/phenomenal-ai-intern" target="_blank" rel="noopener noreferrer">Phenomenal AI</a> • AI Engineer Intern</p>
+            </div>
+            <br></br>
+            <p>Education</p>
+            <div className="interests">
+              <p>• 2020 - 2024 Bachelor's in Information and Communication Technology, Pandit Deendayal Energy University</p>
+            </div>
+          </div>
+        </div>
+        <div className="footer-section">
+            <div className="footer">
+              <div className="domain_name">
+                © janakarpatel.com / <span className="top_badge">Portfolio {currentYear}</span>
+              </div>
+              <div className="equation-container">
+                <div className="sphere_equation">(x - a)² + (y - b)² + (z - c)² = r²</div>
+                <div className="torus_equation">(x² + y² + z² + R² - r²)² = 4R²(x² + y²)</div>
+              </div>
+            </div>
         </div>
       </div>
-
-      <div className="mode-toggle" onClick={toggleTheme}>
-        <svg 
-          className="moon-icon" 
-          xmlns="http://www.w3.org/2000/svg" 
-          width="24" 
-          height="24" 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="currentColor" 
-          strokeWidth="2" 
-          strokeLinecap="round" 
-          strokeLinejoin="round"
-        >
-          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-        </svg>
-        <svg 
-          className="sun-icon" 
-          xmlns="http://www.w3.org/2000/svg" 
-          width="24" 
-          height="24" 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="currentColor" 
-          strokeWidth="2" 
-          strokeLinecap="round" 
-          strokeLinejoin="round"
-        >
-          <circle cx="12" cy="12" r="4"></circle>
-          <path d="M12 2v2"></path>
-          <path d="M12 20v2"></path>
-          <path d="m4.93 4.93 1.41 1.41"></path>
-          <path d="m17.66 17.66 1.41 1.41"></path>
-          <path d="M2 12h2"></path>
-          <path d="M20 12h2"></path>
-          <path d="m6.34 17.66-1.41 1.41"></path>
-          <path d="m19.07 4.93-1.41 1.41"></path>
-        </svg>
-      </div>
-
-      <div className="domain_name">
-        © janakarpatel.com 
-        <p className="top_badge">Portfolio @{currentYear}</p>
-      </div>
-      <div className="torus_equation">(x² + y² + z² + R² - r²)² = 4R²(x² + y²)</div>
-      <div className="sphere_equation">(x - a)² + (y - b)² + (z - c)² = r²</div>
     </>
   )
 }
