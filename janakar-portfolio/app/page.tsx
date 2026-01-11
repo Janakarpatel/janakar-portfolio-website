@@ -5,11 +5,45 @@ import * as THREE from 'three'
 
 export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [isDark, setIsDark] = useState(false)
-  const [currentYear] = useState(new Date().getFullYear())
+  const [timestamp, setTimestamp] = useState<string>('')
+
+  // Update timestamp every second
+  useEffect(() => {
+    const updateTimestamp = () => {
+      const now = new Date()
+      const hours = String(now.getHours()).padStart(2, '0')
+      const minutes = String(now.getMinutes()).padStart(2, '0')
+      const seconds = String(now.getSeconds()).padStart(2, '0')
+      const date = String(now.getDate()).padStart(2, '0')
+      const month = String(now.getMonth() + 1).padStart(2, '0')
+      const year = now.getFullYear()
+
+      setTimestamp(`${hours}:${minutes}:${seconds} - ${date}/${month}/${year}`)
+    }
+
+    updateTimestamp()
+    const interval = setInterval(updateTimestamp, 1000)
+
+    return () => clearInterval(interval)
+  }, [])
 
   useEffect(() => {
     if (!canvasRef.current) return
+
+    const config = {
+      color: 0xff6699,
+      pointSize: 0.1,
+      uSegments: 500,
+      vSegments: 100,
+      radius: 25,
+      width: 10,
+      jitter: 0.8,
+      spreadMultiplier: 8.5,
+      timeScale: 0.2,
+      pulseSpeed: 0.5,
+      rotation: { x: 0.0022, y: 0.0015, z: 0 },
+      groupPosition: { x: 0, y: 0, z: 50 }
+    }
 
     // Scene, Camera, Renderer
     const canvas = canvasRef.current
@@ -29,112 +63,90 @@ export default function Home() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
     // Materials
-    const torusMaterial = new THREE.PointsMaterial({ size: 0.2, color: 0x00ff00 })
-    const sphereMaterial = new THREE.PointsMaterial({ size: 0.2, color: 0x4da6ff })
+    const mobiusMaterial = new THREE.PointsMaterial({ size: config.pointSize, color: config.color })
 
-    // Sphere Point Cloud
-    const sphereGeometry = new THREE.SphereGeometry(15, 100, 50)
-    const spherePositions = sphereGeometry.attributes.position.array as Float32Array
-    
-    // Add jitter to sphere
-    for (let i = 0; i < spherePositions.length; i += 3) {
-      spherePositions[i] += (Math.random() - 0.5)
-      spherePositions[i + 1] += (Math.random() - 0.5)
-      spherePositions[i + 2] += (Math.random() - 0.5)
+    // Möbius strip point cloud
+    const uSegments = config.uSegments
+    const vSegments = config.vSegments
+    const radius = config.radius
+    const width = config.width
+    const positions: number[] = []
+
+    for (let i = 0; i <= uSegments; i++) {
+      const u = (i / uSegments) * Math.PI * 2
+      const cosU = Math.cos(u)
+      const sinU = Math.sin(u)
+
+      for (let j = 0; j <= vSegments; j++) {
+        const v = (j / vSegments - 0.5) * width
+        const twist = u / 2
+        const cosTwist = Math.cos(twist)
+        const sinTwist = Math.sin(twist)
+
+        const x = (radius + v * cosTwist) * cosU
+        const y = (radius + v * cosTwist) * sinU
+        const z = v * sinTwist
+
+        // Add subtle jitter so the cloud feels organic
+        positions.push(
+          x + (Math.random() - 0.5) * config.jitter,
+          y + (Math.random() - 0.5) * config.jitter,
+          z + (Math.random() - 0.5) * config.jitter
+        )
+      }
     }
 
-    const originalSpherePositions = spherePositions.slice()
-    const sphereDirections: THREE.Vector3[] = []
+    const mobiusGeometry = new THREE.BufferGeometry()
+    const mobiusPositions = new Float32Array(positions)
+    mobiusGeometry.setAttribute('position', new THREE.BufferAttribute(mobiusPositions, 3))
 
-    for (let i = 0; i < originalSpherePositions.length; i += 3) {
+    const originalMobiusPositions = mobiusPositions.slice()
+    const mobiusDirections: THREE.Vector3[] = []
+
+    for (let i = 0; i < originalMobiusPositions.length; i += 3) {
       const dir = new THREE.Vector3(
         Math.random() - 0.5,
         Math.random() - 0.5,
         Math.random() - 0.5
       ).normalize()
-      sphereDirections.push(dir)
+      mobiusDirections.push(dir)
     }
 
-    const sphere = new THREE.Points(sphereGeometry, sphereMaterial)
-
-    // Torus Point Cloud
-    const torusGeometry = new THREE.TorusGeometry(30, 10, 32, 200)
-    const torusPositions = torusGeometry.attributes.position.array as Float32Array
-    
-    // Add jitter to torus
-    for (let i = 0; i < torusPositions.length; i += 3) {
-      torusPositions[i] += (Math.random() - 0.5)
-      torusPositions[i + 1] += (Math.random() - 0.5)
-      torusPositions[i + 2] += (Math.random() - 0.5)
-    }
-
-    const originalTorusPositions = torusPositions.slice()
-    const torusDirections: THREE.Vector3[] = []
-
-    for (let i = 0; i < originalTorusPositions.length; i += 3) {
-      const dir = new THREE.Vector3(
-        Math.random() - 0.5,
-        Math.random() - 0.5,
-        Math.random() - 0.5
-      ).normalize()
-      torusDirections.push(dir)
-    }
-
-    const torus = new THREE.Points(torusGeometry, torusMaterial)
+    const mobius = new THREE.Points(mobiusGeometry, mobiusMaterial)
 
     // Group and position
     const group = new THREE.Group()
-    group.add(sphere)
-    group.add(torus)
-    group.position.set(0, 0, 30)
+    group.add(mobius)
+    group.position.set(config.groupPosition.x, config.groupPosition.y, config.groupPosition.z)
     scene.add(group)
-
-    // Theme colors
-    const lightTheme = { torus: 0x00ff00, sphere: 0x4da6ff }
-    const darkTheme = { torus: 0x66ff66, sphere: 0x80ccff }
 
     // Animation loop
     const clock = new THREE.Clock()
     let animationId: number
 
     function tick() {
-      const time = clock.getElapsedTime() * 0.2
-      const pulse = Math.sin(time * 0.5)
+      const time = clock.getElapsedTime() * config.timeScale
+      const pulse = Math.sin(time * config.pulseSpeed)
       const spreadAmount = Math.max(0, pulse)
 
-      // Animate sphere points
-      for (let i = 0; i < spherePositions.length; i += 3) {
+      // Animate Möbius strip points
+      for (let i = 0; i < mobiusPositions.length; i += 3) {
         const index = i / 3
-        const ox = originalSpherePositions[i]
-        const oy = originalSpherePositions[i + 1]
-        const oz = originalSpherePositions[i + 2]
-        const dir = sphereDirections[index]
+        const ox = originalMobiusPositions[i]
+        const oy = originalMobiusPositions[i + 1]
+        const oz = originalMobiusPositions[i + 2]
+        const dir = mobiusDirections[index]
 
-        spherePositions[i] = ox + dir.x * spreadAmount * 10.0
-        spherePositions[i + 1] = oy + dir.y * spreadAmount * 10.0
-        spherePositions[i + 2] = oz + dir.z * spreadAmount * 10.0
+        mobiusPositions[i] = ox + dir.x * spreadAmount * config.spreadMultiplier
+        mobiusPositions[i + 1] = oy + dir.y * spreadAmount * config.spreadMultiplier
+        mobiusPositions[i + 2] = oz + dir.z * spreadAmount * config.spreadMultiplier
       }
-      sphereGeometry.attributes.position.needsUpdate = true
-
-      // Animate torus points
-      for (let i = 0; i < torusPositions.length; i += 3) {
-        const index = i / 3
-        const ox = originalTorusPositions[i]
-        const oy = originalTorusPositions[i + 1]
-        const oz = originalTorusPositions[i + 2]
-        const dir = torusDirections[index]
-
-        torusPositions[i] = ox + dir.x * spreadAmount * 10.0
-        torusPositions[i + 1] = oy + dir.y * spreadAmount * 10.0
-        torusPositions[i + 2] = oz + dir.z * spreadAmount * 10.0
-      }
-      torusGeometry.attributes.position.needsUpdate = true
+      mobiusGeometry.attributes.position.needsUpdate = true
 
       // Rotations
-      sphere.rotation.y += 0.0025
-      torus.rotation.x += 0.0025
-      torus.rotation.y += 0.0005
-      torus.rotation.z += 0.0035
+      mobius.rotation.x += config.rotation.x
+      mobius.rotation.y += config.rotation.y
+      mobius.rotation.z += config.rotation.z
 
       renderer.render(scene, camera)
       animationId = requestAnimationFrame(tick)
@@ -151,31 +163,15 @@ export default function Home() {
 
     window.addEventListener('resize', handleResize)
 
-    // Update theme colors
-    const updateTheme = (dark: boolean) => {
-      const colors = dark ? darkTheme : lightTheme
-      torusMaterial.color.setHex(colors.torus)
-      sphereMaterial.color.setHex(colors.sphere)
-    }
-
-    updateTheme(isDark)
-
     // Cleanup
     return () => {
       window.removeEventListener('resize', handleResize)
       cancelAnimationFrame(animationId)
       renderer.dispose()
-      sphereGeometry.dispose()
-      torusGeometry.dispose()
-      torusMaterial.dispose()
-      sphereMaterial.dispose()
+      mobiusGeometry.dispose()
+      mobiusMaterial.dispose()
     }
-  }, [isDark])
-
-  const toggleTheme = () => {
-    setIsDark(!isDark)
-    document.body.classList.toggle('dark', !isDark)
-  }
+  }, [])
 
   return (
     <>
@@ -188,7 +184,7 @@ export default function Home() {
             <div className="content-left">
               <div className="title-section">
                 <p className="name">Janakar Patel</p>
-                <p className="tag">Data, AI/ML Software + Research (Little)</p>
+                <p className="tag">Data, AI/ML Software + *Art & Design</p>
               </div>
               <div className="social_media">
                 <a href="https://github.com/janakarpatel" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -216,65 +212,28 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="mode-toggle" onClick={toggleTheme}>
-            <svg 
-              className="moon-icon" 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="24" 
-              height="24" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2" 
-              strokeLinecap="round" 
-              strokeLinejoin="round"
-            >
-              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-            </svg>
-            <svg 
-              className="sun-icon" 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="24" 
-              height="24" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2" 
-              strokeLinecap="round" 
-              strokeLinejoin="round"
-            >
-              <circle cx="12" cy="12" r="4"></circle>
-              <path d="M12 2v2"></path>
-              <path d="M12 20v2"></path>
-              <path d="m4.93 4.93 1.41 1.41"></path>
-              <path d="m17.66 17.66 1.41 1.41"></path>
-              <path d="M2 12h2"></path>
-              <path d="M20 12h2"></path>
-              <path d="m6.34 17.66-1.41 1.41"></path>
-              <path d="m19.07 4.93-1.41 1.41"></path>
-            </svg>
-          </div>
-          <div className="interest-section">
-            <p>Past</p>
+          {/* <div className="interest-section">
+            <p>Experience</p>
             <div className="interests">
-              <p><a href="https://example.com/icem-intern" target="_blank" rel="noopener noreferrer">iCEM</a> • Data & AI Solutions Intern</p>
-              <p><a href="https://example.com/phenomenal-ai-intern" target="_blank" rel="noopener noreferrer">Phenomenal AI</a> • AI Engineer Intern</p>
+              <p><a href="https://example.com/icem-intern" target="_blank" rel="noopener noreferrer">iCEM</a> • Data & AI Solutions</p>
+              <p><a href="https://example.com/phenomenal-ai-intern" target="_blank" rel="noopener noreferrer">Phenomenal AI</a> • AI Engineer</p>
             </div>
             <br></br>
             <p>Education</p>
             <div className="interests">
-              <p>• 2020 - 2024 Bachelor's in Information and Communication Technology, Pandit Deendayal Energy University</p>
+              <p>• 2020 - 2024 Bachelor's in Information and Communication Technology</p>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="footer-section">
             <div className="footer">
               <div className="domain_name">
-                © janakarpatel.com / <span className="top_badge">Portfolio {currentYear}</span>
+                © janakarpatel.vercel.app / <span className="top_badge">{timestamp}</span>
               </div>
               <div className="equation-container">
-                <div className="sphere_equation">(x - a)² + (y - b)² + (z - c)² = r²</div>
-                <div className="torus_equation">(x² + y² + z² + R² - r²)² = 4R²(x² + y²)</div>
+                <div className="equation">x = (1 + v cos(u/2)) * cos u</div>
+                <div className="equation">y = (1 + v cos(u/2)) * sin u</div>
+                <div className="equation">y = z = v sin(u/2)</div>
               </div>
             </div>
         </div>

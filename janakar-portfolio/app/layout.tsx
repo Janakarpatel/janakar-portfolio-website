@@ -1,16 +1,16 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import LenisProvider from './components/LenisProvider'
 
-const inter = Inter({ 
+const geist = Geist({ 
   subsets: ['latin'],
-  weight: ['400', '600']
+  weight: ['400', '500', '600', '700']
 })
 
 export const metadata: Metadata = {
-  title: 'Janakar Patel - Portfolio',
-  description: 'Data, AI/ML Software + Research Portfolio',
+  title: 'Janakar Patel',
+  description: 'Data',
 }
 
 export default function RootLayout({
@@ -21,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="icon" href="/Group 3.png" type="image/png" />
         <link 
           rel="stylesheet" 
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" 
@@ -30,7 +31,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet" />
       </head>
-      <body className={inter.className}>
+      <body className={geist.className}>
         <LenisProvider>
           {children}
         </LenisProvider>
