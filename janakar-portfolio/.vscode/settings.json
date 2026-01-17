@@ -1,0 +1,26 @@
+{
+    "tailwindCSS.experimental.classRegex": [
+        ["className[\\s]*=[\\s]*['\"`]([^'\"`]*)['\"`]", "([a-zA-Z0-9\\-:/@]+)"]
+    ],
+    "tailwindCSS.includeLanguages": {
+        "typescript": "javascript",
+        "typescriptreact": "javascript"
+    },
+    "tailwindCSS.lint.cssConflict": "warning",
+    "tailwindCSS.lint.invalidApply": "error",
+    "tailwindCSS.lint.invalidScreen": "error",
+    "tailwindCSS.lint.invalidVariant": "error",
+    "tailwindCSS.lint.invalidConfigPath": "error",
+    "tailwindCSS.lint.invalidTailwindDirective": "error",
+    "tailwindCSS.lint.recommendedVariantOrder": "warning",
+    "tailwindCSS.validate": true,
+    "css.validate": false,
+    "editor.quickSuggestions": {
+        "strings": true
+    },
+    "tailwindCSS.emmetCompletions": true,
+    "tailwindCSS.colorDecorators": true,
+    "files.associations": {
+        "*.css": "tailwindcss"
+    }
+}

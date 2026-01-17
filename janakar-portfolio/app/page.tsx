@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import * as THREE from 'three'
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import Footer from './components/Footer'
 
 export default function Home() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
   const [timestamp, setTimestamp] = useState<string>('')
 
   // Update timestamp every second
@@ -27,174 +27,25 @@ export default function Home() {
     return () => clearInterval(interval)
   }, [])
 
-  useEffect(() => {
-    if (!canvasRef.current) return
-
-    const config = {
-      color: 0xff6699,
-      pointSize: 0.1,
-      uSegments: 500,
-      vSegments: 100,
-      radius: 25,
-      width: 10,
-      jitter: 0.8,
-      spreadMultiplier: 8.5,
-      timeScale: 0.2,
-      pulseSpeed: 0.5,
-      rotation: { x: 0.0022, y: 0.0015, z: 0 },
-      groupPosition: { x: 0, y: 0, z: 50 }
-    }
-
-    // Scene, Camera, Renderer
-    const canvas = canvasRef.current
-    const scene = new THREE.Scene()
-
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    )
-    camera.position.set(0, 0, 90)
-    scene.add(camera)
-
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
-    renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-
-    // Materials
-    const mobiusMaterial = new THREE.PointsMaterial({ size: config.pointSize, color: config.color })
-
-    // Möbius strip point cloud
-    const uSegments = config.uSegments
-    const vSegments = config.vSegments
-    const radius = config.radius
-    const width = config.width
-    const positions: number[] = []
-
-    for (let i = 0; i <= uSegments; i++) {
-      const u = (i / uSegments) * Math.PI * 2
-      const cosU = Math.cos(u)
-      const sinU = Math.sin(u)
-
-      for (let j = 0; j <= vSegments; j++) {
-        const v = (j / vSegments - 0.5) * width
-        const twist = u / 2
-        const cosTwist = Math.cos(twist)
-        const sinTwist = Math.sin(twist)
-
-        const x = (radius + v * cosTwist) * cosU
-        const y = (radius + v * cosTwist) * sinU
-        const z = v * sinTwist
-
-        // Add subtle jitter so the cloud feels organic
-        positions.push(
-          x + (Math.random() - 0.5) * config.jitter,
-          y + (Math.random() - 0.5) * config.jitter,
-          z + (Math.random() - 0.5) * config.jitter
-        )
-      }
-    }
-
-    const mobiusGeometry = new THREE.BufferGeometry()
-    const mobiusPositions = new Float32Array(positions)
-    mobiusGeometry.setAttribute('position', new THREE.BufferAttribute(mobiusPositions, 3))
-
-    const originalMobiusPositions = mobiusPositions.slice()
-    const mobiusDirections: THREE.Vector3[] = []
-
-    for (let i = 0; i < originalMobiusPositions.length; i += 3) {
-      const dir = new THREE.Vector3(
-        Math.random() - 0.5,
-        Math.random() - 0.5,
-        Math.random() - 0.5
-      ).normalize()
-      mobiusDirections.push(dir)
-    }
-
-    const mobius = new THREE.Points(mobiusGeometry, mobiusMaterial)
-
-    // Group and position
-    const group = new THREE.Group()
-    group.add(mobius)
-    group.position.set(config.groupPosition.x, config.groupPosition.y, config.groupPosition.z)
-    scene.add(group)
-
-    // Animation loop
-    const clock = new THREE.Clock()
-    let animationId: number
-
-    function tick() {
-      const time = clock.getElapsedTime() * config.timeScale
-      const pulse = Math.sin(time * config.pulseSpeed)
-      const spreadAmount = Math.max(0, pulse)
-
-      // Animate Möbius strip points
-      for (let i = 0; i < mobiusPositions.length; i += 3) {
-        const index = i / 3
-        const ox = originalMobiusPositions[i]
-        const oy = originalMobiusPositions[i + 1]
-        const oz = originalMobiusPositions[i + 2]
-        const dir = mobiusDirections[index]
-
-        mobiusPositions[i] = ox + dir.x * spreadAmount * config.spreadMultiplier
-        mobiusPositions[i + 1] = oy + dir.y * spreadAmount * config.spreadMultiplier
-        mobiusPositions[i + 2] = oz + dir.z * spreadAmount * config.spreadMultiplier
-      }
-      mobiusGeometry.attributes.position.needsUpdate = true
-
-      // Rotations
-      mobius.rotation.x += config.rotation.x
-      mobius.rotation.y += config.rotation.y
-      mobius.rotation.z += config.rotation.z
-
-      renderer.render(scene, camera)
-      animationId = requestAnimationFrame(tick)
-    }
-
-    tick()
-
-    // Resize handler
-    const handleResize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight
-      camera.updateProjectionMatrix()
-      renderer.setSize(window.innerWidth, window.innerHeight)
-    }
-
-    window.addEventListener('resize', handleResize)
-
-    // Cleanup
-    return () => {
-      window.removeEventListener('resize', handleResize)
-      cancelAnimationFrame(animationId)
-      renderer.dispose()
-      mobiusGeometry.dispose()
-      mobiusMaterial.dispose()
-    }
-  }, [])
-
   return (
     <>
-      <div className="main-container">
-        <div className="background-three-js">
-          <canvas ref={canvasRef} className="webgl" />
-        </div>
-        <div className="main-text-container">
-          <div className="content-section">
+      <div className="w-full min-h-screen flex flex-col relative">
+        <div className="w-auto h-max p-10 pb-32 z-10 max-[768px]:p-6 max-[768px]:pb-40 max-[480px]:p-8.75 max-[480px]:pb-48">
+          <div className="m-0 flex flex-col items-start gap-6 max-[768px]:w-full max-[768px]:gap-6 max-[480px]:w-full max-[480px]:gap-5">
             <div className="content-left">
-              <div className="title-section">
-                <p className="name">Janakar Patel</p>
-                <p className="tag">Data, AI/ML Software + *Art & Design</p>
+              <div className="flex flex-col gap-0">
+                <p className="m-0 p-0 text-[2.3rem] font-medium tracking-[--letter-spacing-custom-tighter] text-primary max-[480px]:text-[2rem] max-[480px]:leading-tight">Janakar Patel</p>
+                <p className="m-0 text-base font-[1rem] tracking-[--letter-spacing-custom-tight] text-secondary max-[480px]:text-base max-[480px]:mt-1">Data, AI/ML Software + *Art & Design</p>
               </div>
-              <div className="social_media">
-                <a href="https://github.com/janakarpatel" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="https://www.linkedin.com/in/janakarpatel/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                <a href="https://twitter.com/janakarpatel" target="_blank" rel="noopener noreferrer">Twitter</a>
-                <a href="mailto:contact.janakarpatel@gmail.com">Email</a>
+              <div className="mt-4 flex gap-2.5 max-[480px]:mt-5 max-[480px]:gap-2.5">
+                <a href="https://github.com/janakarpatel" target="_blank" rel="noopener noreferrer" className="hover-link text-[1.1rem] tracking-[-0.3px] cursor-pointer pointer-events-auto relative z-2 max-[480px]:text-base">GitHub</a>
+                <a href="https://www.linkedin.com/in/janakarpatel/" target="_blank" rel="noopener noreferrer" className="hover-link text-[1.1rem] tracking-[-0.3px] cursor-pointer pointer-events-auto relative z-2 max-[480px]:text-base">LinkedIn</a>
+                <a href="https://twitter.com/janakarpatel" target="_blank" rel="noopener noreferrer" className="hover-link text-[1.1rem] tracking-[-0.3px] cursor-pointer pointer-events-auto relative z-2 max-[480px]:text-base">Twitter</a>
+                <a href="mailto:contact.janakarpatel@gmail.com" className="hover-link text-[1.1rem] tracking-[-0.3px] cursor-pointer pointer-events-auto relative z-2 max-[480px]:text-base">Email</a>
               </div>
             </div>
-            <div className="content-right">
-              <div className="description">
+            <div className="w-full">
+              <div className="w-3/4 mt-0 text-[1.1rem] font-crimson font-normal tracking-[-0.3px] text-primary leading-[1.2] max-[768px]:w-full max-[768px]:text-base max-[480px]:w-full max-[480px]:text-base max-[480px]:leading-tight">
                 I build intelligent data systems that power real-time decision-making at enterprise scale. 
                 At Tata Consultancy Services, I’ve been fortunate to work at the intersection of data engineering 
                 and applied AI, where I design and optimize large-scale data pipelines on Databricks to support 
@@ -212,6 +63,9 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <div className="mt-4 w-3/4 text-[1.1rem] font-crimson font-normal tracking-[-0.3px] text-primary leading-[1.2] max-[768px]:w-full max-[768px]:text-base max-[480px]:w-full max-[480px]:text-base max-[480px]:leading-tight">
+            If my work resonates with you, feel free to reach out anytime at <Link href="/contact" className="cursor-pointer underline text-blue-700">here.</Link>
+          </div>
           {/* <div className="interest-section">
             <p>Experience</p>
             <div className="interests">
@@ -225,18 +79,7 @@ export default function Home() {
             </div>
           </div> */}
         </div>
-        <div className="footer-section">
-            <div className="footer">
-              <div className="domain_name">
-                © janakarpatel.vercel.app / <span className="top_badge">{timestamp}</span>
-              </div>
-              <div className="equation-container">
-                <div className="equation">x = (1 + v cos(u/2)) * cos u</div>
-                <div className="equation">y = (1 + v cos(u/2)) * sin u</div>
-                <div className="equation">y = z = v sin(u/2)</div>
-              </div>
-            </div>
-        </div>
+        <Footer timestamp={timestamp} fixed />
       </div>
     </>
   )
