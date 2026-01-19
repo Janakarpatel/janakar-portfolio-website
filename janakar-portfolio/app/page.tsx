@@ -34,7 +34,7 @@ export default function Home() {
           <div className="m-0 flex flex-col items-start gap-6 max-[768px]:w-full max-[768px]:gap-6 max-[480px]:w-full max-[480px]:gap-5">
             <div className="content-left">
               <div className="flex flex-col gap-0">
-                <p className="m-0 p-0 text-[2.3rem] font-medium tracking-[--letter-spacing-custom-tighter] text-primary max-[480px]:text-[2rem] max-[480px]:leading-tight">Janakar Patel</p>
+                <p className="m-0 p-0 text-[2.3rem] font-medium tracking-[--letter-spacing-custom-tighter] text-primary max-[480px]:text-[2rem] max-[480px]:leading-tight">Janakar Patel | જનકાર પટેલ</p>
                 <p className="m-0 text-base font-[1rem] tracking-[--letter-spacing-custom-tight] text-secondary max-[480px]:text-base max-[480px]:mt-1">Data, AI/ML Software + *Art & Design</p>
               </div>
               <div className="mt-4 flex gap-2.5 max-[480px]:mt-5 max-[480px]:gap-2.5">
@@ -45,26 +45,21 @@ export default function Home() {
               </div>
             </div>
             <div className="w-full">
-              <div className="w-3/4 mt-0 text-[1.1rem] font-crimson font-normal tracking-[-0.3px] text-primary leading-[1.2] max-[768px]:w-full max-[768px]:text-base max-[480px]:w-full max-[480px]:text-base max-[480px]:leading-tight">
-                I build intelligent data systems that power real-time decision-making at enterprise scale. 
-                At Tata Consultancy Services, I’ve been fortunate to work at the intersection of data engineering 
-                and applied AI, where I design and optimize large-scale data pipelines on Databricks to support 
-                Retrieval-Augmented Generation (RAG) systems. My work focuses on creating the invisible infrastructure 
-                that enables large language models to think, retrieve, and respond reliably across multiple business 
-                units. Alongside this, I’ve developed regression-based machine learning models to interpret market 
-                and customer service data, enhancing workforce scheduling accuracy and optimizing service performance. 
-                Through these efforts, I’ve come to appreciate the role of robust data foundations in advancing AI 
-                capabilities—not just as systems of automation, but as systems of intelligence that scale human 
-                decision-making across industries.
+              <div className="w-1/2 mt-0 text-[1.1rem] font-crimson font-normal tracking-[-0.2px] text-primary leading-[1.2] max-[768px]:w-full max-[768px]:text-base max-[480px]:w-full max-[480px]:text-base max-[480px]:leading-tight">
+                I'm an engineer and a self-taught artist curious about software and hardware, 
+                currently based in Ahmedabad City and working on Data and AI at <span className="underline cursor-pointer hover:text-blue-700 hover:italic hover:font-bold"><a href="https://www.tcs.com" target="_blank" rel="noopener noreferrer">TCS</a></span>.  
+                Previously, I was an engineering student at <span className="underline cursor-pointer hover:text-blue-700 hover:italic hover:font-bold"><a href="https://www.pdpu.ac.in" target="_blank" rel="noopener noreferrer">Pandit Deendayal Energy University</a></span> in Gandhinagar.
                 <br /><br />
-                Outside of my work, I am deeply interested in pursuing research. I am continuously learning 
-                how impactful research is conducted, exploring ideas that connect AI (specifically Machine Learning), Data and Computation. 
-                I love to contribute to work that creates real-world impact.
+                I'm care about intentional thinking, design, and engineering. I 
+                enjoy dreaming up ambitious toys that solve complex problems in 
+                creative ways. I want to create beautiful things that I am proud of.
+                <br /><br />
+                I've recently been working on and thinking about machine understandings research.
               </div>
             </div>
           </div>
-          <div className="mt-4 w-3/4 text-[1.1rem] font-crimson font-normal tracking-[-0.3px] text-primary leading-[1.2] max-[768px]:w-full max-[768px]:text-base max-[480px]:w-full max-[480px]:text-base max-[480px]:leading-tight">
-            If my work resonates with you, feel free to reach out anytime at <Link href="/contact" className="cursor-pointer underline text-blue-700">here.</Link>
+          <div className="mt-4 w-3/4 text-[1.1rem] font-crimson font-normal tracking-[-0.2px] text-primary leading-[1.2] max-[768px]:w-full max-[768px]:text-base max-[480px]:w-full max-[480px]:text-base max-[480px]:leading-tight">
+            If my work resonates with you, feel free to reach out anytime at <Link href="/contact" className="cursor-pointer underline text-blue-700">click here.</Link>
           </div>
           {/* <div className="interest-section">
             <p>Experience</p>

@@ -17,7 +17,7 @@ const bitter = Bitter({
 })
 
 export const metadata: Metadata = {
-  title: 'Janakar Patel',
+  title: 'hello! | Janakar Patel જનકાર પટેલ',
   description: 'Data',
 }
 
@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={bitter.variable}>
       <head>
-        <link rel="icon" href="/Group 3.png" type="image/png" />
+        <link rel="icon" href="/Frame 2.svg" type="image/svg+xml" />
         <link 
           rel="stylesheet" 
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" 
