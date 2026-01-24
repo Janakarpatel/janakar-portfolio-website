@@ -31,7 +31,7 @@ export default function Contact() {
     return (
         <>
         <div className="w-full min-h-screen flex flex-col relative">
-            <div className="w-auto h-max p-10 pb-32 z-10 max-[768px]:p-6 max-[768px]:pb-40 max-[768px]:h-fit max-[480px]:p-8.75 max-[480px]:pb-48">
+            <div className="w-auto h-max p-10 pb-32 z-10 max-[768px]:p-6 max-[768px]:pb-40 max-[768px]:h-fit max-[480px]:p-6 max-[480px]:pb-48">
                 <div className="mb-4">
                     <Link href="/" className="hover-link inline-flex items-center gap-2 text-base tracking-[-0.2px] duration-[0.3s] ease-[cubic-bezier(0.4,0,0.2,1)] group">
                         <ChevronLeft size={18} className="transition-transform duration-[0.4s] ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-translate-x-1" />
