@@ -20,9 +20,13 @@ const config: Config = {
         'hover-blue': '#0000ff',
       },
       fontFamily: {
+        'geist': 'var(--font-geist)',
         'bitter': 'var(--font-bitter)',
-        'crimson': ['"Crimson Text"', 'serif'],
-        'courier': ['"Courier New"', 'Courier', 'monospace'],
+        'lora': 'var(--font-family-lora)',
+        'crimson': 'var(--font-family-crimson)',
+        'goudy': 'var(--font-family-goudy)',
+        'arial': 'var(--font-family-arial)',
+        'courier': 'var(--font-family-courier)',
       },
       letterSpacing: {
         'custom-tight': '-1px',

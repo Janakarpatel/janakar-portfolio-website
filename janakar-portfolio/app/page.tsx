@@ -45,7 +45,7 @@ export default function Home() {
               </div>
             </div>
             <div className="w-full">
-              <div className="w-1/2 mt-0 text-[1.1rem] font-crimson font-normal tracking-[-0.2px] text-primary leading-[1.2] max-[768px]:w-full max-[768px]:text-base max-[480px]:w-full max-[480px]:text-base max-[480px]:leading-tight">
+              <div className="w-1/2 mt-3 text-[1.1rem] font-crimson font-normal tracking-[-0.2px] text-primary leading-[1.2] max-[768px]:w-full max-[768px]:text-base max-[480px]:w-full max-[480px]:text-base max-[480px]:leading-tight">
                 I'm an engineer and a self-taught artist curious about software and hardware, 
                 currently based in Ahmedabad City and working on Data and AI at <span className="underline cursor-pointer hover:text-blue-700 hover:italic hover:font-bold"><a href="https://www.tcs.com" target="_blank" rel="noopener noreferrer">TCS</a></span>.  
                 Previously, I was an engineering student at <span className="underline cursor-pointer hover:text-blue-700 hover:italic hover:font-bold"><a href="https://www.pdpu.ac.in" target="_blank" rel="noopener noreferrer">Pandit Deendayal Energy University</a></span> in Gandhinagar.
@@ -74,7 +74,7 @@ export default function Home() {
             </div>
           </div> */}
         </div>
-        <Footer timestamp={timestamp} fixed />
+        <Footer timestamp={timestamp} />
       </div>
     </>
   )

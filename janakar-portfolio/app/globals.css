@@ -1,7 +1,10 @@
 @import "tailwindcss";
 
 :root {
+  --font-family-lora: "Lora", serif;
   --font-family-crimson: "Crimson Text", serif;
+  --font-family-goudy: "Sorts Mill Goudy", serif;
+  --font-family-arial: Arial, sans-serif;
   --font-family-courier: "Courier New", Courier, monospace;
   
   --color-hover-blue: #0000ff;

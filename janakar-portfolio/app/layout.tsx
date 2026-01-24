@@ -17,8 +17,8 @@ const bitter = Bitter({
 })
 
 export const metadata: Metadata = {
-  title: 'hello! | Janakar Patel જનકાર પટેલ',
-  description: 'Data',
+  title: 'hello! | Janakar',
+  description: 'Portfolio of Janakar Patel',
 }
 
 export default function RootLayout({

@@ -42,7 +42,7 @@ export default function Contact() {
                     <div className="content-left">
                     <div className="flex flex-col gap-1">
                         <p className="m-0 text-[2.3rem] font-medium tracking-[-1.2px] text-primary max-[480px]:text-[2rem] max-[480px]:leading-tight">Get in Touch</p>
-                        <p className="mt-0.5 mb-0 text-base font-normal tracking-[-1px] text-secondary max-[480px]:text-base max-[480px]:mt-1">Let's collaborate and build something great</p>
+                        <p className="mt-0.5 mb-0 text-base font-normal tracking-[-0.5px] text-secondary max-[480px]:text-base max-[480px]:mt-1">Let's collaborate and build something great</p>
                     </div>
                     </div>
                     <div className="w-full">
@@ -58,7 +58,7 @@ export default function Contact() {
                     {/* <h2 className="m-0 p-0 text-2xl font-medium tracking-custom-super-tight text-black dark:text-white">Contact Methods</h2> */}
                     <div className="flex flex-col gap-4">
                         <div className="flex flex-col">
-                            <h3 className="m-0 text-lg font-medium tracking-[-0.3px]">Email</h3>
+                            <h3 className="m-0 text-md font-medium tracking-[-0.3px]">Email</h3>
                             <p className="w-3/4 mt-2 font-crimson text-lg tracking-[-0.5px] leading-tight m-0 max-[768px]:w-full max-[480px]:w-full">The best way to reach me is via email. I try to respond to every email. However, I tend to procrastinate on long/non-urgent emails, and sometimes forget to respond altogether. If I haven't replied in a week, feel free to follow up. <a href="mailto:contact.janakarpatel@gmail.com" className="hover-link m-0 text-base tracking-[-0.2px] font-crimson italic underline">contact.janakarpatel@gmail.com</a></p>
                         </div>
                         <div className="flex flex-col">
@@ -70,15 +70,15 @@ export default function Contact() {
                                     <span className="m-0 text-base tracking-[-0.5px] font-crimson"> : I read Twitter DMs, but I find its inbox hard to use so please don’t use Twitter to reach me.</span>
                                 </li>
                                 <li>
-                                    <a href="https://twitter.com/janakarpatel" target="_blank" rel="noopener noreferrer" className="m-0 font-crimson text-base tracking-[-0.2px] text-blue-700">LinkedIn</a>
+                                    <a href="https://linkedin.com/in/janakarpatel" target="_blank" rel="noopener noreferrer" className="m-0 font-crimson text-base tracking-[-0.2px] text-blue-700">LinkedIn</a>
                                     <span className="m-0 text-base tracking-[-0.5px] font-crimson"> : I read LinkedIn messages but I prefer emails.</span>
                                 </li>
                                 <li>
-                                    <a href="https://twitter.com/janakarpatel" target="_blank" rel="noopener noreferrer" className="m-0 font-crimson text-base tracking-[-0.2px] text-blue-700">Youtube</a>
+                                    <a href="https://www.youtube.com/@prjack935" target="_blank" rel="noopener noreferrer" className="m-0 font-crimson text-base tracking-[-0.2px] text-blue-700">Youtube</a>
                                     <span className="m-0 text-base tracking-[-0.5px] font-crimson"> : I’m camera-shy, so I haven’t done a lot of videos. But I want to change that.</span>
                                 </li>
                                 <li>
-                                    <a href="https://twitter.com/janakarpatel" target="_blank" rel="noopener noreferrer" className="m-0 font-crimson text-base tracking-[-0.2px] text-blue-700">Instagram</a>
+                                    <a href="https://www.instagram.com/its.jnkr" target="_blank" rel="noopener noreferrer" className="m-0 font-crimson text-base tracking-[-0.2px] text-blue-700">Instagram</a>
                                     <span className="m-0 text-base tracking-[-0.5px] font-crimson"> : If I don’t follow you on Instagram, your message goes to a separate folder that I don’t check.</span>
                                 </li>
                             </ul>
