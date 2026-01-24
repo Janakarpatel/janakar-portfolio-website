@@ -30,7 +30,7 @@ export default function Home() {
   return (
     <>
       <div className="w-full min-h-screen flex flex-col relative">
-        <div className="w-auto h-max p-10 pb-32 z-10 max-[768px]:p-6 max-[768px]:pb-40 max-[480px]:p-8.75 max-[480px]:pb-48">
+        <div className="w-auto h-max p-10 pb-32 z-10 max-[768px]:p-6 max-[768px]:pb-40 max-[480px]:p-6 max-[480px]:pb-48">
           <div className="m-0 flex flex-col items-start gap-6 max-[768px]:w-full max-[768px]:gap-6 max-[480px]:w-full max-[480px]:gap-5">
             <div className="content-left">
               <div className="flex flex-col gap-0">
