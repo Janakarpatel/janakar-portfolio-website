@@ -58,7 +58,7 @@ export default function Contact() {
                     {/* <h2 className="m-0 p-0 text-2xl font-medium tracking-custom-super-tight text-black dark:text-white">Contact Methods</h2> */}
                     <div className="flex flex-col gap-4">
                         <div className="flex flex-col">
-                            <h3 className="m-0 text-md font-medium tracking-[-0.3px]">Email</h3>
+                            <h3 className="m-0 text-lg font-medium tracking-[-0.3px]">Email</h3>
                             <p className="w-3/4 mt-2 font-crimson text-lg tracking-[-0.5px] leading-tight m-0 max-[768px]:w-full max-[480px]:w-full">The best way to reach me is via email. I try to respond to every email. However, I tend to procrastinate on long/non-urgent emails, and sometimes forget to respond altogether. If I haven't replied in a week, feel free to follow up. <a href="mailto:contact.janakarpatel@gmail.com" className="hover-link m-0 text-base tracking-[-0.2px] font-crimson italic underline">contact.janakarpatel@gmail.com</a></p>
                         </div>
                         <div className="flex flex-col">

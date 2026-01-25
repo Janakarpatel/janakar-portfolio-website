@@ -50,7 +50,7 @@ export default function Home() {
                 currently based in Ahmedabad City and working on Data and AI at <span className="underline cursor-pointer hover:text-blue-700 hover:italic hover:font-bold"><a href="https://www.tcs.com" target="_blank" rel="noopener noreferrer">TCS</a></span>.  
                 Previously, I was an engineering student at <span className="underline cursor-pointer hover:text-blue-700 hover:italic hover:font-bold"><a href="https://www.pdpu.ac.in" target="_blank" rel="noopener noreferrer">Pandit Deendayal Energy University</a></span> in Gandhinagar.
                 <br /><br />
-                I'm care about intentional thinking, design, and engineering. I 
+                I care about intentional thinking, design, and engineering. I 
                 enjoy dreaming up ambitious toys that solve complex problems in 
                 creative ways. I want to create beautiful things that I am proud of.
                 <br /><br />
