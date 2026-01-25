@@ -47,16 +47,17 @@ export function MobiusProvider({ children }: { children: React.ReactNode }) {
         rainbowSpeed: 0.3, // Speed of color flow
         // Custom color palette - add your hex colors here
         colorPalette: [
-            '#e01e37',
+            // '#e01e37',
             // '#da1e37',
             // '#c71f37',
-            '#bd1f36',
+            // '#bd1f36',
             // '#b21e35',
             // '#a71e34',
-            '#a11d33',
+            // '#a11d33',
             // '#85182a',
             // '#6e1423',
-            '#641220',
+            // '#641220',
+            '#2511AE', '#EBEAF3', '#D8C1F6', '#9A8DE1', '#BFBAFA'
         ]
     }
 
