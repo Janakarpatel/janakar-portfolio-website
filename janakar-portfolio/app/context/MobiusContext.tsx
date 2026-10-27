@@ -89,7 +89,8 @@ const MOBIUS_CONFIG = {
   groupPosition: { x: 0, y: 0, z: 50 },
   rainbowSpeed: 0.14,
   // blue-purple with mid stops so the loop blends without hard jumps
-  colorPalette: ['#1A0A8C', '#2511AE', '#5C4AD0', '#9A8DE1', '#BFBAFA', '#7B6DE0'],
+  // same rotation as janakarpatel.vercel.app
+  colorPalette: ['#2511AE', '#EBEAF3', '#D8C1F6', '#9A8DE1', '#BFBAFA'],
   /** Saturn-style core: particle sphere inside the strip ring. */
   showPlanet: false,
   planetRadius: 10,
@@ -254,9 +255,9 @@ export function MobiusProvider({ children }: { children: React.ReactNode }) {
         original[p + 1] = y
         original[p + 2] = z
 
-        let dx = Math.random() - 0.5
-        let dy = Math.random() - 0.5
-        let dz = Math.random() - 0.5
+        const dx = Math.random() - 0.5
+        const dy = Math.random() - 0.5
+        const dz = Math.random() - 0.5
         const invLen = 1 / Math.hypot(dx, dy, dz)
         directions[p] = dx * invLen
         directions[p + 1] = dy * invLen
