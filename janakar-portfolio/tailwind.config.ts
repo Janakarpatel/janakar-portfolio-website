@@ -20,7 +20,8 @@ const config: Config = {
         'hover-blue': '#0000ff',
       },
       fontFamily: {
-        'geist': 'var(--font-geist)',
+        'haskoy': 'var(--font-haskoy)',
+        'rasa': 'var(--font-rasa)',
         'bitter': 'var(--font-bitter)',
         'lora': 'var(--font-family-lora)',
         'crimson': 'var(--font-family-crimson)',

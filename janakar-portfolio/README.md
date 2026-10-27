@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Janakar Portfolio
+
+Personal portfolio site for [Janakar Patel](https://janakarpatel.vercel.app) — engineer, artist, and Data/AI practitioner based in Ahmedabad, India.
+
+Built with Next.js 15 (App Router), featuring an animated Three.js Möbius strip background and Lenis smooth scrolling.
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Framework | [Next.js 15](https://nextjs.org) (App Router) |
+| UI | [React 19](https://react.dev) |
+| Styling | [Tailwind CSS 4](https://tailwindcss.com) |
+| 3D Background | [Three.js](https://threejs.org) |
+| Smooth Scroll | [Lenis](https://lenis.darkroom.engineering) |
+| Icons | [Lucide React](https://lucide.dev) |
+| Language | TypeScript |
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 20+
+- npm
+
+### Install & Run
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Create production build |
+| `npm run start` | Serve production build |
+| `npm run lint` | Run ESLint |
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+janakar-portfolio/
+├── app/
+│   ├── components/          # Shared UI components
+│   │   ├── Footer.tsx       # Live clock + Möbius equations
+│   │   ├── LenisProvider.tsx
+│   │   └── MobiusBackground.tsx
+│   ├── contact/
+│   │   └── page.tsx         # Contact / communication preferences
+│   ├── context/
+│   │   └── MobiusContext.tsx # Three.js scene lifecycle
+│   ├── hooks/
+│   │   └── useLiveTimestamp.ts
+│   ├── globals.css          # Global styles & CSS variables
+│   ├── layout.tsx           # Root layout, fonts, providers
+│   └── page.tsx             # Home page
+├── docs/
+│   └── ARCHITECTURE.md      # Detailed architecture notes
+├── public/
+│   └── Frame 2.svg          # Favicon
+├── next.config.ts
+├── tailwind.config.ts
+└── tsconfig.json
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Pages
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Route | Description |
+|-------|-------------|
+| `/` | Home — bio, social links, introduction |
+| `/contact` | Contact preferences, email, social links, scheduling notes |
 
-## Deploy on Vercel
+## Key Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Möbius Strip Background
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+A parametric point cloud rendered with Three.js persists across all routes. Points pulse outward on a sine wave and cycle through a custom purple palette. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for implementation details.
+
+### Smooth Scrolling
+
+Lenis provides inertial scroll on all pages via a root-level provider in `layout.tsx`.
+
+### Responsive Layout
+
+Tailwind breakpoints at 768px and 480px adapt typography and spacing for mobile.
+
+## Configuration
+
+- **Möbius animation** — edit `MOBIUS_CONFIG` in `app/context/MobiusContext.tsx`
+- **Fonts** — loaded via `next/font/google` in `app/layout.tsx`
+- **Theme colors** — CSS variables in `app/globals.css` and Tailwind extensions in `tailwind.config.ts`
+
+## Deployment
+
+The site is deployed on [Vercel](https://vercel.com). Push to the connected branch to trigger a deploy, or run:
+
+```bash
+npm run build
+npm run start
+```
+
+## License
+
+Private project. All rights reserved.

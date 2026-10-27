@@ -1,11 +1,25 @@
 @import "tailwindcss";
 
 :root {
+  --font-family-haskoy: var(--font-haskoy), "Haskoy", sans-serif;
+  --font-family-rasa: var(--font-rasa), "Rasa", serif;
   --font-family-lora: "Lora", serif;
-  --font-family-crimson: "Crimson Text", serif;
-  --font-family-goudy: "Sorts Mill Goudy", serif;
+  --font-family-crimson: var(--font-crimson), "Crimson Text", serif;
+  --font-family-goudy: var(--font-goudy), "Sorts Mill Goudy", serif;
   --font-family-arial: Arial, sans-serif;
   --font-family-courier: "Courier New", Courier, monospace;
+
+  /* Theme colors (benji.org values) */
+  --body-bg: #fdfdfc;
+  --body-color: #111;
+  --muted-color: rgba(0, 0, 0, 0.4);
+  --muted-solid-color: #989897; /* --muted-color flattened onto --body-bg */
+  --muted-soft-color: rgba(0, 0, 0, 0.65);
+  --muted-hover-color: rgba(0, 0, 0, 0.8);
+  --toc-color: rgba(18, 18, 18, 0.4);
+  --toc-active-color: rgba(18, 18, 18, 0.8);
+  --line-color: #f2f2f2;
+  --headphone-pad-color: #f7941d; /* Walkman-era orange foam */
   
   --color-hover-blue: #0000ff;
   --color-dark-secondary: rgba(255, 255, 255, 0.85);
@@ -46,28 +60,83 @@ body {
   margin: 0;
   padding: 0;
   font-weight: 400;
-  letter-spacing: -1px;
-  background-color: #ffffff;
-  color: #000000;
+  letter-spacing: -0.00563rem; /* benji.org's -0.09px */
+  background-color: var(--body-bg);
+  color: var(--body-color);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* benji.org top frost: soft white fade only (no blur), above main/footer (z-10). */
+.top-frost {
+  pointer-events: none;
+  z-index: 50;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8rem;
+  background: linear-gradient(
+    180deg,
+    #fff 0%,
+    hsla(0, 0%, 100%, 0.738) 19%,
+    hsla(0, 0%, 100%, 0.541) 34%,
+    hsla(0, 0%, 100%, 0.382) 47%,
+    hsla(0, 0%, 100%, 0.278) 56.5%,
+    hsla(0, 0%, 100%, 0.194) 65%,
+    hsla(0, 0%, 100%, 0.126) 73%,
+    hsla(0, 0%, 100%, 0.075) 80.2%,
+    hsla(0, 0%, 100%, 0.042) 86.1%,
+    hsla(0, 0%, 100%, 0.021) 91%,
+    hsla(0, 0%, 100%, 0.008) 95.2%,
+    hsla(0, 0%, 100%, 0.002) 98.2%,
+    hsla(0, 0%, 100%, 0) 100%
+  );
+}
+
+@media screen and (max-width: 768px) {
+  .top-frost {
+    height: 2.5rem;
+  }
+}
+
 body.dark {
-  background-color: #000000;
-  color: #ffffff;
+  --body-bg: #000000;
+  --body-color: #ffffff;
+  --muted-color: rgba(255, 255, 255, 0.4);
+  --muted-solid-color: #666666;
+  --muted-soft-color: rgba(255, 255, 255, 0.65);
+  --muted-hover-color: rgba(255, 255, 255, 0.8);
+  --toc-color: rgba(255, 255, 255, 0.4);
+  --toc-active-color: rgba(255, 255, 255, 0.8);
+  --line-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark .top-frost {
+  background: linear-gradient(
+    180deg,
+    #000 0%,
+    rgba(0, 0, 0, 0.738) 19%,
+    rgba(0, 0, 0, 0.541) 34%,
+    rgba(0, 0, 0, 0.382) 47%,
+    rgba(0, 0, 0, 0.278) 56.5%,
+    rgba(0, 0, 0, 0.194) 65%,
+    rgba(0, 0, 0, 0.126) 73%,
+    rgba(0, 0, 0, 0.075) 80.2%,
+    rgba(0, 0, 0, 0.042) 86.1%,
+    rgba(0, 0, 0, 0.021) 91%,
+    rgba(0, 0, 0, 0.008) 95.2%,
+    rgba(0, 0, 0, 0.002) 98.2%,
+    rgba(0, 0, 0, 0) 100%
+  );
 }
 
 /* Custom utility classes for colors */
 .text-primary {
-  color: #000000;
-}
-
-body.dark .text-primary {
-  color: #ffffff;
+  color: var(--body-color);
 }
 
 .text-secondary {
-  color: #000000;
+  color: var(--body-color);
 }
 
 body.dark .text-secondary {
@@ -75,9 +144,11 @@ body.dark .text-secondary {
 }
 
 .hover-link {
-  color: #000000;
+  color: var(--body-color);
   text-decoration: none;
-  transition: color 0.3s ease;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 0.3s ease, text-decoration-color 0.3s ease;
 }
 
 body.dark .hover-link {
@@ -85,16 +156,177 @@ body.dark .hover-link {
 }
 
 .hover-link:hover {
-  color: #0000ff;
+  color: var(--color-hover-blue);
+  text-decoration: underline;
+  text-decoration-color: var(--color-hover-blue);
 }
 
 /* Font utility classes */
+.font-rasa {
+  font-family: var(--font-family-rasa);
+}
+
 .font-crimson {
-  font-family: "Crimson Text", serif;
+  font-family: var(--font-family-crimson);
+}
+
+.font-inter {
+  font-family: var(--font-inter), "Inter", sans-serif;
+}
+
+/* Home projects list: benji.org postList, verbatim */
+.post-list { line-height: normal; }
+.post-list ul { display: flex; flex-direction: column; list-style: none; margin: 0; padding: 0; }
+.post-list li { margin: 0; }
+.post-list-title {
+  margin: 0;
+  color: var(--muted-color);
+  font-size: 0.875rem;
+  font-weight: 460;
+  letter-spacing: -0.00563rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line-color);
+}
+.post-list > ul > li { border-bottom: 1px solid var(--line-color); }
+.post-list > ul > li:last-child { border-bottom: none; }
+.post-list > ul > li > ul > li > a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.735rem 0 0.735rem 6.75rem;
+  text-decoration: none;
+}
+.post-list > ul > li > ul > li > a::after {
+  content: "";
+  border-bottom: 1px solid var(--line-color);
+  position: absolute;
+  bottom: 0;
+  left: 6.75rem;
+  right: 0;
+}
+.post-list > ul > li > ul > li:last-child > a::after { display: none; }
+.post-list-name {
+  font-size: 0.875rem;
+  font-weight: 460;
+  letter-spacing: -0.00563rem;
+  transition: opacity 0.14s;
+}
+.post-list time {
+  color: var(--muted-color);
+  font-size: 0.875rem;
+  font-weight: 460;
+  line-height: normal;
+  letter-spacing: -0.00563rem;
+}
+.post-list time span { display: inline-block; transition: opacity 0.14s; }
+/* the "/" is for screen readers; the year shows once per group, pinned to the left */
+.post-list time span:nth-child(2) { position: absolute; width: 0; height: 0; padding: 0; overflow: hidden; }
+.post-list time span:last-child { visibility: hidden; position: absolute; left: 0; }
+.post-list > ul > li > ul > li:first-child > a > time > span:last-child { visibility: visible; }
+@media (min-width: 520px) {
+  .post-list > ul:hover .post-list-name,
+  .post-list > ul:hover time span { opacity: 0.3; }
+  .post-list > ul:hover time span:last-child { opacity: 1; }
+}
+.post-list > ul > li > ul > li > a:hover .post-list-name,
+.post-list > ul > li > ul > li > a:hover time span { opacity: 1; }
+@media (max-width: 520px) {
+  .post-list > ul > li > ul > li > a { padding-left: 3rem; }
 }
 
 .font-courier {
   font-family: "Courier New", Courier, monospace;
+}
+
+/* Footer dog box SVG: floppy ears hinge at the top, z's float from the bottom */
+.bb {
+  display: inline-block;
+  /* solid, so overlapping strokes don't darken the way a translucent grey would */
+  color: var(--muted-solid-color);
+  overflow: visible;
+}
+
+.bb-ear-l,
+.bb-ear-r {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+}
+
+/* benji's z's grow out of the viewport origin, not their own box */
+.bb-z {
+  transform-box: view-box;
+  transform-origin: 0 0;
+}
+
+.bb-ear-l,
+.bb-ear-r { transform-origin: center; }
+
+/* benji's 12s twitch timing; positive rotate swings the left ear outward */
+@keyframes bbEarLeftAwake {
+  0%, 9% { transform: rotate(0deg); }
+  12% { transform: rotate(10deg); }
+  16%, 34% { transform: rotate(0deg); }
+  38% { transform: rotate(16deg); }
+  42% { transform: rotate(6deg); }
+  48%, 58% { transform: rotate(0deg); }
+  62% { transform: rotate(28deg); }
+  70% { transform: rotate(24deg); }
+  78%, 100% { transform: rotate(0deg); }
+}
+
+@keyframes bbEarRightAwake {
+  0%, 9% { transform: rotate(0deg); }
+  12% { transform: rotate(-8deg); }
+  16%, 34% { transform: rotate(0deg); }
+  38% { transform: rotate(-14deg); }
+  42% { transform: rotate(-5deg); }
+  48%, 58% { transform: rotate(0deg); }
+  62% { transform: rotate(-28deg); }
+  70% { transform: rotate(-24deg); }
+  78%, 100% { transform: rotate(0deg); }
+}
+
+@keyframes bbEarLeftSleep {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes bbEarRightSleep {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-3deg); }
+}
+
+/* benji.org zFloat1-3, verbatim */
+@keyframes bbZFloat1 {
+  0% { transform: translate(0, 0) scale(0.7); opacity: 0; }
+  10%, 80% { opacity: 1; }
+  100% { transform: translate(4px, -14px) scale(1); opacity: 0; }
+}
+
+@keyframes bbZFloat2 {
+  0% { transform: translate(0, 0) scale(0.6); opacity: 0; }
+  10%, 80% { opacity: 1; }
+  100% { transform: translate(6px, -16px) scale(0.9); opacity: 0; }
+}
+
+@keyframes bbZFloat3 {
+  0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+  10%, 80% { opacity: 1; }
+  100% { transform: translate(8px, -18px) scale(0.8); opacity: 0; }
+}
+
+.bb--awake .bb-ear-l { animation: bbEarLeftAwake 12s ease-in-out infinite; }
+.bb--awake .bb-ear-r { animation: bbEarRightAwake 12s ease-in-out infinite; }
+.bb--sleep .bb-ear-l { animation: bbEarLeftSleep 4s ease-in-out infinite; }
+.bb--sleep .bb-ear-r { animation: bbEarRightSleep 4s ease-in-out infinite; }
+.bb-z-1 { animation: bbZFloat1 3s ease-out 0s infinite both; }
+.bb-z-2 { animation: bbZFloat2 3s ease-out 1s infinite both; }
+.bb-z-3 { animation: bbZFloat3 3s ease-out 2s infinite both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bb-ear-l, .bb-ear-r, .bb-z { animation: none; }
 }
 
 @keyframes slideLeft {
