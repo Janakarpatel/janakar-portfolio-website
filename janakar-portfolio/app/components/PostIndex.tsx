@@ -2,14 +2,14 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import type { Project } from '@/app/data/projects'
+import type { Post } from '@/content'
 
-/** Left index bar: back to home + in-page section TOC (benji.org-style). */
-export default function ProjectIndex({ project }: { project: Project }) {
+/** Left index bar: back home + in-page section TOC (benji.org-style). */
+export default function PostIndex({ post }: { post: Post }) {
   const [activeId, setActiveId] = useState<string | null>(null)
 
   useEffect(() => {
-    const ids = project.sections.map((s) => s.id)
+    const ids = post.sections.map((s) => s.id)
     const elements = ids
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el != null)
@@ -28,7 +28,7 @@ export default function ProjectIndex({ project }: { project: Project }) {
 
     elements.forEach((el) => observer.observe(el))
     return () => observer.disconnect()
-  }, [project.sections])
+  }, [post.sections])
 
   return (
     <aside className="fixed top-20 left-20 z-10 font-inter font-[460] max-[1080px]:static max-[1080px]:pb-8">
@@ -47,15 +47,8 @@ export default function ProjectIndex({ project }: { project: Project }) {
         </Link>
 
         <nav aria-label="On this page" className="pt-[1.875rem] max-w-40 max-[1080px]:hidden">
-          <p
-            className={`m-0 pb-4 text-[13px] leading-[1.2] tracking-[-0.04px] transition-colors ${
-              activeId ? 'text-[var(--toc-color)]' : 'text-[var(--body-color)]'
-            }`}
-          >
-            {project.title}
-          </p>
           <ul className="m-0 p-0 list-none flex flex-col gap-2">
-            {project.sections.map((section) => {
+            {post.sections.map((section) => {
               const active = activeId === section.id
               return (
                 <li key={section.id} className="m-0">
@@ -67,7 +60,7 @@ export default function ProjectIndex({ project }: { project: Project }) {
                         : 'text-[var(--toc-color)] hover:text-[var(--toc-active-color)]'
                     }`}
                   >
-                    {section.title}
+                    {section.nav ?? section.title}
                   </a>
                 </li>
               )

@@ -143,22 +143,205 @@ body.dark .text-secondary {
   color: rgba(255, 255, 255, 0.85);
 }
 
-.hover-link {
-  color: var(--body-color);
+/* benji.org basic-link: soft grey underline, darkens on hover */
+.hover-link,
+.basic-link {
+  position: relative;
+  display: inline;
+  color: inherit;
+  line-height: inherit;
   text-decoration: none;
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
-  transition: color 0.3s ease, text-decoration-color 0.3s ease;
+  transition: all 0.2s ease;
 }
 
-body.dark .hover-link {
-  color: #ffffff;
+.basic-link {
+  font-weight: inherit;
+}
+
+.hover-link::before,
+.basic-link::before {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  border-radius: 2px;
+  background: #d9d9d9;
+  opacity: 1;
+  transition: inherit;
+}
+
+.basic-link:hover::before {
+  background: #666;
 }
 
 .hover-link:hover {
   color: var(--color-hover-blue);
-  text-decoration: underline;
-  text-decoration-color: var(--color-hover-blue);
+}
+
+.hover-link:hover::before {
+  background: var(--color-hover-blue);
+}
+
+/* benji-style footnote superscripts */
+.footnote-ref {
+  font-size: 0.7em;
+  font-variant-numeric: tabular-nums;
+  margin-left: 0.1em;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/*
+ * benji.org article rhythm (from his CSS):
+ *   p               → padding-top 1rem
+ *   section heading → padding 4rem 0 1.5rem
+ *   figure          → air above/below; stacked figures tighten to 0.5rem
+ */
+.article-prose > header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-bottom: 0.5rem;
+}
+
+.article-prose > header h1 {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  letter-spacing: -0.09px;
+}
+
+.article-prose > header time {
+  color: var(--muted-color);
+}
+
+.article-prose p {
+  margin: 0;
+  padding-top: 1rem;
+}
+
+.article-prose section:not(.footnotes) > h2 {
+  margin: 0;
+  padding: 4rem 0 1.5rem;
+  font-family: var(--font-family-crimson);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.13px;
+  text-wrap: balance;
+}
+
+/* first section after the summary — slightly less than mid-article breaks */
+.article-prose > p + section:not(.footnotes) > h2 {
+  padding-top: 2.25rem;
+}
+
+.article-prose section:not(.footnotes) > h2 + .project-figure {
+  padding-top: 0.25rem;
+}
+
+.project-figure {
+  margin: 0;
+  padding: 1.5rem 0 2.5rem;
+}
+
+/* consecutive showcase shots — benji imageGroup gap */
+.project-figure + .project-figure {
+  padding-top: 0.5rem;
+}
+
+.project-figure-frame {
+  overflow: hidden;
+  position: relative;
+  border-radius: 0.5rem;
+  background: var(--line-color);
+}
+
+.project-figure-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.project-figure figcaption {
+  margin: 0;
+  padding: 0.75rem 0 0;
+  color: var(--muted-color);
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 460;
+  letter-spacing: 0.00063rem;
+  line-height: 1.2;
+}
+
+/* benji.org footnotes: hairline, no visible title, tiny counters */
+.footnotes {
+  padding: 2.5rem 0 0;
+}
+
+.footnotes::before {
+  content: "";
+  display: block;
+  width: 3.125rem;
+  height: 1px;
+  background: #ededed;
+}
+
+.footnotes ol {
+  list-style: none;
+  margin: 0;
+  padding: 3rem 0 0 0.25rem;
+  counter-reset: list;
+}
+
+.footnotes ol li {
+  position: relative;
+  counter-increment: list;
+  color: var(--muted-color);
+  font-size: 0.75rem;
+  font-weight: 460;
+  letter-spacing: 0.00063rem;
+  line-height: 1.2;
+  padding: 0 0 0.5625rem 0.25rem;
+}
+
+.footnotes ol li::before {
+  position: absolute;
+  right: 100%;
+  top: 0;
+  content: counter(list);
+  font-size: 0.45rem;
+  font-weight: 460;
+  letter-spacing: 0.00063rem;
+  padding-right: 0.35rem;
+}
+
+body.dark .footnotes::before {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+body.dark .hover-link::before,
+body.dark .basic-link::before {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+body.dark .hover-link:hover::before,
+body.dark .basic-link:hover::before {
+  background: rgba(255, 255, 255, 0.65);
 }
 
 /* Font utility classes */
@@ -338,4 +521,27 @@ body.dark .hover-link {
     transform: translateX(-4px);
     opacity: 1;
   }
+}
+
+/* benji.org staggerIn: paragraphs ease in on every page */
+@keyframes staggerIn {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+main p {
+  animation: staggerIn 0.5s ease both;
+}
+main p:nth-of-type(1) { animation-delay: 0s; }
+main p:nth-of-type(2) { animation-delay: 0.05s; }
+main p:nth-of-type(3) { animation-delay: 0.1s; }
+main p:nth-of-type(4) { animation-delay: 0.15s; }
+main p:nth-of-type(5) { animation-delay: 0.2s; }
+main p:nth-of-type(6) { animation-delay: 0.25s; }
+main p:nth-of-type(7) { animation-delay: 0.3s; }
+main p:nth-of-type(8) { animation-delay: 0.35s; }
+main p:nth-of-type(n + 9) { animation-delay: 0.4s; }
+
+@media (prefers-reduced-motion: reduce) {
+  main p { animation: none; }
 }

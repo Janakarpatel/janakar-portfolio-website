@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Footer from '@/app/components/Footer'
 
 const h2 = 'm-0 pt-4 text-[15px] font-crimson font-normal leading-normal tracking-[-0.13px] text-balance'
-const link = 'text-primary underline underline-offset-2 hover:text-[var(--color-hover-blue)]'
+const link = 'basic-link'
 
 export default function Contact() {
   return (

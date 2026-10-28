@@ -3,9 +3,12 @@
 import Link from 'next/link'
 import Footer from '@/app/components/Footer'
 import AmbientSound from '@/app/components/AmbientSound'
-import { projects } from '@/app/data/projects'
+import PostList from '@/app/components/PostList'
+import { getPostsByKind } from '@/content'
 
-const years = [...new Set(projects.map((p) => p.listDate.split(' / ')[1]))]
+const projects = getPostsByKind('project')
+const writings = getPostsByKind('writing')
+const blogs = getPostsByKind('blog')
 
 export default function Home() {
   return (
@@ -13,30 +16,30 @@ export default function Home() {
       <main className="w-full h-max z-10">
         {/* benji.org page column: 36.375rem wide, 5rem / 1rem padding (2rem / 1.5rem on mobile) */}
         <div className="max-w-[36.375rem] mx-auto pt-20 px-4 max-[768px]:pt-8 max-[768px]:px-6">
-          <header className="m-0 flex flex-col items-start gap-6 max-[768px]:w-full max-[768px]:gap-6 max-[480px]:w-full max-[480px]:gap-5">
+          <header className="m-0 flex flex-col items-start max-[768px]:w-full max-[480px]:w-full">
             <div className="w-full flex flex-col gap-0">
               <div className="flex items-center justify-between gap-4">
-                <h1 className="m-0 p-0 flex items-start gap-2 text-[1.7rem] font-haskoy font-medium tracking-[--letter-spacing-custom-tighter] leading-none text-primary max-[480px]:text-[2rem]">
+                <h1 className="m-0 p-0 flex items-start gap-2 text-[16px] font-haskoy font-semibold tracking-[--letter-spacing-custom-tighter] leading-none text-primary max-[480px]:text-[2rem]">
                   <span>Janakar Patel</span>
                   <span className="font-normal tracking-normal leading-none">
-                    (<span lang="gu" className="font-rasa text-[1.1em]">જનકાર પટેલ</span>)
+                    (<span lang="gu" className="font-rasa text-[18px]">જનકાર પટેલ</span>)
                   </span>
                 </h1>
                 <AmbientSound />
               </div>
-              <p className="mt-1 text-base tracking-[-0.09px] leading-[1.43] text-secondary">
+              <p className="font-inter text-[13px] font-[460] tracking-[-0.09px] leading-5 text-[var(--muted-color)]">
                 Data, AI/ML Software, Hardware + *Art &amp; Design
               </p>
             </div>
             <nav
               aria-label="Social links"
-              className="flex gap-4"
+              className="mt-6 flex gap-4"
             >
               <a
                 href="https://x.com/janakarpatel"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover-link text-[1rem] font-medium tracking-[-0.09px] cursor-pointer pointer-events-auto relative z-2 max-[480px]:text-base"
+                className="hover-link text-[14px] font-medium tracking-[-0.09px] cursor-pointer pointer-events-auto relative z-2 max-[480px]:text-base"
               >
                 X
               </a>
@@ -44,7 +47,7 @@ export default function Home() {
                 href="https://github.com/janakarpatel"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover-link text-[1rem] tracking-[-0.09px] cursor-pointer pointer-events-auto relative z-2 max-[480px]:text-base font-medium"
+                className="hover-link text-[14px] tracking-[-0.09px] cursor-pointer pointer-events-auto relative z-2 max-[480px]:text-base font-medium"
               >
                 GitHub
               </a>
@@ -52,13 +55,13 @@ export default function Home() {
                 href="https://www.linkedin.com/in/janakarpatel/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover-link text-[1rem] font-medium tracking-[-0.09px] cursor-pointer pointer-events-auto relative z-2 max-[480px]:text-base"
+                className="hover-link text-[14px] font-medium tracking-[-0.09px] cursor-pointer pointer-events-auto relative z-2 max-[480px]:text-base"
               >
                 LinkedIn
               </a>
               <a
                 href="mailto:contact.janakarpatel@gmail.com"
-                className="hover-link text-[1rem] font-medium tracking-[-0.09px] cursor-pointer pointer-events-auto relative z-2 max-[480px]:text-base"
+                className="hover-link text-[14px] font-medium tracking-[-0.09px] cursor-pointer pointer-events-auto relative z-2 max-[480px]:text-base"
               >
                 Email
               </a>
@@ -67,16 +70,16 @@ export default function Home() {
 
           <section
             aria-label="About"
-            className="mt-6 max-w-xl text-[1rem] font-crimson font-normal tracking-[-0.09px] text-primary leading-[1.43] max-[480px]:max-w-full"
+            className="max-w-xl text-[14px] font-inter font-[460] tracking-[-0.09px] text-primary leading-5 max-[480px]:max-w-full"
           >
-            <p className="m-0">
+            <p className="m-0 mt-6">
               I&apos;m an engineer and a self-taught artist curious about software and hardware,
               currently based in Ahmedabad City and working on Data and AI at{' '}
               <a
                 href="https://www.tcs.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline cursor-pointer hover:text-[var(--color-hover-blue)] hover:italic hover:font-bold"
+                className="basic-link cursor-pointer"
               >
                 TCS
               </a>
@@ -85,7 +88,7 @@ export default function Home() {
                 href="https://www.pdpu.ac.in"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline cursor-pointer hover:text-[var(--color-hover-blue)] hover:italic hover:font-bold"
+                className="basic-link cursor-pointer"
               >
                 Pandit Deendayal Energy University
               </a>{' '}
@@ -101,40 +104,16 @@ export default function Home() {
             </p>
           </section>
 
-          <p className="mt-4 max-w-xl text-[1.1rem] font-crimson font-normal tracking-[-0.09px] text-primary leading-[1.43] max-[768px]:text-base max-[480px]:max-w-full">
+          <p className="m-0 mt-4 max-w-xl text-[14px] font-inter font-[460] tracking-[-0.09px] text-primary leading-5 max-[480px]:max-w-full">
             If my work resonates with you, feel free to reach out anytime at{' '}
-            <Link href="/contact" className="cursor-pointer underline text-primary hover:text-[var(--color-hover-blue)]">
+            <Link href="/contact" className="basic-link cursor-pointer">
               click here.
             </Link>
           </p>
 
-          <section id="projects" aria-labelledby="projects-heading" className="post-list mt-12 max-w-xl scroll-mt-8 font-inter">
-            <h2 id="projects-heading" className="post-list-title">
-              Projects
-            </h2>
-            <ul>
-              {years.map((year) => (
-                <li key={year}>
-                  <ul>
-                    {projects
-                      .filter((p) => p.listDate.endsWith(year))
-                      .map((project) => (
-                        <li key={project.slug}>
-                          <Link href={`/projects/${project.slug}`}>
-                            <span className="post-list-name text-primary">{project.title}</span>
-                            <time>
-                              <span>{project.listDate.split(' / ')[0]}</span>
-                              <span>/</span>
-                              <span>{year}</span>
-                            </time>
-                          </Link>
-                        </li>
-                      ))}
-                  </ul>
-                </li>
-              ))}
-            </ul>
-          </section>
+          <PostList id="projects" title="Projects" posts={projects} />
+          <PostList id="writing" title="Writing" posts={writings} />
+          <PostList id="blog" title="Blog" posts={blogs} />
         </div>
       </main>
       <Footer />
