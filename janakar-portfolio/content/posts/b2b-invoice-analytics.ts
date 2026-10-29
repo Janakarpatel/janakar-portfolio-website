@@ -7,7 +7,7 @@ const post: Post = {
   date: 'June 2026 – Present',
   listDate: '01/06 / 2026',
   summary:
-    'A production web app for a fasteners manufacturer — invoices, clients, payments, and a little analytics, instead of Word and Excel.',
+    'A web app for a fasteners manufacturer: invoices, clients, payments, and light analytics. Replaces Word and Excel.',
   sections: [
     {
       id: 'word-and-excel',
@@ -16,7 +16,7 @@ const post: Post = {
       blocks: [
         {
           type: 'p',
-          text: 'Billing lived in Word docs and Excel sheets. One invoice took about twenty minutes. Clients, payments, and reporting were three different files that never quite agreed.',
+          text: 'Billing lived in Word docs and Excel sheets. One invoice took about twenty minutes. Clients, payments, and reporting sat in three files that did not match.',
         },
       ],
     },
@@ -26,7 +26,7 @@ const post: Post = {
       blocks: [
         {
           type: 'p',
-          text: 'I built a single web app for invoicing, client management, payment tracking, and the numbers they actually look at. Same job, fewer clicks — under five minutes per invoice once it was live.',
+          text: 'I built one web app for invoicing, clients, payments, and the numbers they check. Same work, fewer steps. Under five minutes per invoice once it was live.',
         },
       ],
     },
@@ -36,7 +36,7 @@ const post: Post = {
       blocks: [
         {
           type: 'p',
-          text: 'Running for the manufacturing client since June 2026. Still iterating with them as freelance work.',
+          text: 'Live with the manufacturing client since June 2026. Still updating it as freelance work.',
         },
       ],
     },

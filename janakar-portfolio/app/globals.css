@@ -50,6 +50,8 @@ html.lenis {
 html {
   scroll-behavior: auto;
   scrollbar-width: none; /* hide scrollbar in Firefox */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 html::-webkit-scrollbar {
@@ -238,8 +240,8 @@ body.dark .text-secondary {
   margin: 0;
   padding: 4rem 0 1.5rem;
   font-family: var(--font-family-crimson);
-  font-size: 0.9375rem;
-  font-weight: 400;
+  font-size: 1.05rem;
+  font-weight: 600;
   line-height: normal;
   letter-spacing: -0.13px;
   text-wrap: balance;
@@ -286,6 +288,45 @@ body.dark .text-secondary {
   font-weight: 460;
   letter-spacing: 0.00063rem;
   line-height: 1.2;
+}
+
+/* benji.org rehype-pretty-code figure + github-light-default tokens */
+.project-code {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0.625rem 0;
+}
+
+.project-code pre {
+  margin: 0;
+  display: block;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  border-radius: 0.5rem;
+  background: #f8f8f8;
+  color: #1f2328;
+  font-family: "SF Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+.project-code pre code {
+  display: block;
+  padding: 0.875rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.project-code pre code span {
+  display: inline;
+}
+
+.project-code figcaption {
+  margin: 0;
+  color: #7c7b74;
+  font-size: 0.75rem;
+  text-align: center;
 }
 
 /* benji.org footnotes: hairline, no visible title, tiny counters */
@@ -416,7 +457,32 @@ body.dark .basic-link:hover::before {
 .post-list > ul > li > ul > li > a:hover .post-list-name,
 .post-list > ul > li > ul > li > a:hover time span { opacity: 1; }
 @media (max-width: 520px) {
-  .post-list > ul > li > ul > li > a { padding-left: 3rem; }
+  /* year gutter: still left-pinned, tighter than desktop 6.75rem */
+  .post-list > ul > li > ul > li > a {
+    padding-left: 3.75rem;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .post-list-name {
+    flex: 1;
+    min-width: 0;
+  }
+  .post-list time {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  /* same article rhythm, slightly less air on a short phone viewport */
+  .article-prose section:not(.footnotes) > h2 {
+    padding: 2.75rem 0 1.25rem;
+  }
+  .article-prose > p + section:not(.footnotes) > h2 {
+    padding-top: 2rem;
+  }
+  .project-figure {
+    padding: 1.25rem 0 2rem;
+  }
 }
 
 .font-courier {

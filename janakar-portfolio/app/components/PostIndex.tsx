@@ -2,9 +2,10 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { Radical } from 'lucide-react'
 import type { Post } from '@/content'
 
-/** Left index bar: back home + in-page section TOC (benji.org-style). */
+/** Left index bar: back to site root + in-page section TOC (benji.org-style). */
 export default function PostIndex({ post }: { post: Post }) {
   const [activeId, setActiveId] = useState<string | null>(null)
 
@@ -37,13 +38,8 @@ export default function PostIndex({ post }: { post: Post }) {
           href="/#projects"
           className="flex items-center gap-1 py-1 w-fit text-[14px] leading-5 tracking-[-0.09px] text-[var(--muted-color)] hover:text-[var(--muted-hover-color)] transition-colors"
         >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
-            <path
-              d="M5.5 4L1.5 8M1.5 8L5.5 12M1.5 8H10C11.3807 8 12.5 6.88071 12.5 5.5V5.5C12.5 4.11929 11.3807 3 10 3H8.5"
-              stroke="currentColor"
-            />
-          </svg>
-          Index
+          <Radical size={14} strokeWidth={1.25} absoluteStrokeWidth aria-hidden />
+          Root
         </Link>
 
         <nav aria-label="On this page" className="pt-[1.875rem] max-w-40 max-[1080px]:hidden">

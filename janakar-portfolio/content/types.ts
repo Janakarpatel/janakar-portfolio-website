@@ -4,6 +4,7 @@ export type PostKind = 'project' | 'writing' | 'blog'
 export type PostBlock =
   | { type: 'p'; text: string }
   | { type: 'image'; src: string; alt: string; caption?: string }
+  | { type: 'code'; code: string; language?: string; caption?: string }
 
 export type PostSection = {
   id: string

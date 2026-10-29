@@ -2,6 +2,7 @@ import Image from 'next/image'
 import type { Post } from '@/content'
 import ProjectRichText from '@/app/components/ProjectRichText'
 import PostIndex from '@/app/components/PostIndex'
+import CodeBlock from '@/app/components/CodeBlock'
 
 /** Shared article layout for projects, writings, and blogs (benji.org column). */
 export default function Article({ post }: { post: Post }) {
@@ -22,12 +23,25 @@ export default function Article({ post }: { post: Post }) {
         {post.sections.map((section) => (
           <section key={section.id} id={section.id} className="scroll-mt-20">
             <h2>{section.title}</h2>
-            {section.blocks.map((block, i) =>
-              block.type === 'p' ? (
-                <p key={i}>
-                  <ProjectRichText text={block.text} />
-                </p>
-              ) : (
+            {section.blocks.map((block, i) => {
+              if (block.type === 'p') {
+                return (
+                  <p key={i}>
+                    <ProjectRichText text={block.text} />
+                  </p>
+                )
+              }
+              if (block.type === 'code') {
+                return (
+                  <CodeBlock
+                    key={i}
+                    code={block.code}
+                    language={block.language}
+                    caption={block.caption}
+                  />
+                )
+              }
+              return (
                 <figure key={i} className="project-figure">
                   <div className="project-figure-frame">
                     <Image
@@ -42,7 +56,7 @@ export default function Article({ post }: { post: Post }) {
                   {block.caption ? <figcaption>{block.caption}</figcaption> : null}
                 </figure>
               )
-            )}
+            })}
           </section>
         ))}
 

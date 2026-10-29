@@ -7,7 +7,7 @@ const post: Post = {
   date: 'December 2023',
   listDate: '01/12 / 2023',
   summary:
-    'Palmprint authentication that stays on the device — MediaPipe for the region of interest, a custom CV model, and a Raspberry Pi for inference.',
+    'Palmprint auth that runs on the device. MediaPipe for the palm region, a custom CV model, inference on a Raspberry Pi.',
   sections: [
     {
       id: 'no-round-trip',
@@ -15,7 +15,7 @@ const post: Post = {
       blocks: [
         {
           type: 'p',
-          text: 'I did not want palm auth that had to phone home.^[1] Extract the palm on device, classify it there, decide there.',
+          text: 'I did not want palm auth that sent images to a server.^[1] Find the palm on device, classify it there, decide there.',
         },
       ],
     },
@@ -25,7 +25,7 @@ const post: Post = {
       blocks: [
         {
           type: 'p',
-          text: 'MediaPipe finds the region of interest. A small preprocessing pipeline gets samples ready for training. The model sits on a Raspberry Pi and runs in real time — around 90% accuracy on our set.',
+          text: 'MediaPipe finds the region of interest. A short preprocessing step gets samples ready for training. The model runs on a Raspberry Pi in real time, around 90% on our set.',
         },
       ],
     },
@@ -36,7 +36,7 @@ const post: Post = {
       blocks: [
         {
           type: 'p',
-          text: 'Python end to end. Built July through December 2023. The interesting constraint was always the board, not the notebook.',
+          text: 'Python end to end. Built July through December 2023. The hard part was fitting it on the Pi, not training in a notebook.',
         },
       ],
     },
@@ -44,7 +44,7 @@ const post: Post = {
   footnotes: [
     {
       id: '1',
-      text: 'Edge here means the Pi on the desk — not a marketing synonym for “cloud nearby.”',
+      text: 'Edge here means the Pi on the desk, not a nearby cloud.',
     },
   ],
 }

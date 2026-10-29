@@ -20,6 +20,7 @@ const post: Post = {
       blocks: [
         { type: 'p', text: 'Body text. Use [links](https://example.com) inline.' },
         // { type: 'image', src: '/projects/my-post/shot.png', alt: '…', caption: '…' },
+        // { type: 'code', language: 'bash', code: 'npm install …', caption: '…' },
       ],
     },
   ],

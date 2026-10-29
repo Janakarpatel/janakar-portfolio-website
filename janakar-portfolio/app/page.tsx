@@ -19,10 +19,12 @@ export default function Home() {
           <header className="m-0 flex flex-col items-start max-[768px]:w-full max-[480px]:w-full">
             <div className="w-full flex flex-col gap-0">
               <div className="flex items-center justify-between gap-4">
-                <h1 className="m-0 p-0 flex items-start gap-2 text-[16px] font-haskoy font-semibold tracking-[--letter-spacing-custom-tighter] leading-none text-primary max-[480px]:text-[2rem]">
+                <h1 className="m-0 p-0 flex items-start gap-2 text-[16px] font-haskoy font-semibold tracking-[--letter-spacing-custom-tighter] leading-none text-primary">
                   <span>Janakar Patel</span>
                   <span className="font-normal tracking-normal leading-none">
-                    (<span lang="gu" className="font-rasa text-[18px]">જનકાર પટેલ</span>)
+                    <span lang="gu" className="font-rasa text-[18px]">
+                      (જનકાર પટેલ)
+                    </span>
                   </span>
                 </h1>
                 <AmbientSound />
@@ -33,13 +35,13 @@ export default function Home() {
             </div>
             <nav
               aria-label="Social links"
-              className="mt-6 flex gap-4"
+              className="mt-6 flex gap-4 max-[480px]:flex-wrap max-[480px]:gap-y-2"
             >
               <a
                 href="https://x.com/janakarpatel"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover-link text-[14px] font-medium tracking-[-0.09px] cursor-pointer pointer-events-auto relative z-2 max-[480px]:text-base"
+                className="hover-link text-[14px] font-medium tracking-[-0.09px] cursor-pointer pointer-events-auto relative z-2"
               >
                 X
               </a>
@@ -47,7 +49,7 @@ export default function Home() {
                 href="https://github.com/janakarpatel"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover-link text-[14px] tracking-[-0.09px] cursor-pointer pointer-events-auto relative z-2 max-[480px]:text-base font-medium"
+                className="hover-link text-[14px] tracking-[-0.09px] cursor-pointer pointer-events-auto relative z-2 font-medium"
               >
                 GitHub
               </a>
@@ -55,13 +57,13 @@ export default function Home() {
                 href="https://www.linkedin.com/in/janakarpatel/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover-link text-[14px] font-medium tracking-[-0.09px] cursor-pointer pointer-events-auto relative z-2 max-[480px]:text-base"
+                className="hover-link text-[14px] font-medium tracking-[-0.09px] cursor-pointer pointer-events-auto relative z-2"
               >
                 LinkedIn
               </a>
               <a
                 href="mailto:contact.janakarpatel@gmail.com"
-                className="hover-link text-[14px] font-medium tracking-[-0.09px] cursor-pointer pointer-events-auto relative z-2 max-[480px]:text-base"
+                className="hover-link text-[14px] font-medium tracking-[-0.09px] cursor-pointer pointer-events-auto relative z-2"
               >
                 Email
               </a>

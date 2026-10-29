@@ -67,7 +67,7 @@ export default function Footer() {
   return (
     <footer className="w-full z-10 relative">
       {/* benji.org: same page column, footer padded 40px / 80px, plus the column's 2.5rem bottom */}
-      <div className="max-w-[36.375rem] mx-auto px-4 pt-24 pb-30 max-[768px]:px-6">
+      <div className="max-w-[36.375rem] mx-auto px-4 pt-24 pb-30 max-[768px]:px-6 max-[768px]:pt-16 max-[768px]:pb-20">
         <div className="w-full">
           <p
             className="m-0 text-[13px] leading-[20px] tracking-[-0.04px] text-[var(--muted-color)]"
